@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @import url('./variables.css');
+@import url('./custom_fonts.css');
 @import url('./tailwind.css');
 
 * {
@@ -48,9 +49,9 @@ html {
 
 body {
 	width: 100%;
+	font-family: 'Poppins', sans-serif;
 	font-size: 15px;
-	color: var(--primary-black);
-	font-family: "Poppins", sans-serif;
+	color: var(--primary-white);
 }
 
 /* ::selection {
@@ -72,14 +73,20 @@ input[type=number] {
 	appearance: textfield;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Inter', sans-serif;
-	color: var(--primary-black);
-	font-weight: 700;
+p, button {
+	font-family: 'Poppins', sans-serif;
+	color: var(--primary-white);
 }
 
-p {
-	color: var(--primary-black);
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Rubik One', sans-serif;
+	text-transform: uppercase;
+	color: var(--primary-white);
+	font-weight: 500;
+}
+
+a {
+	font-family: 'Rubik', sans-serif;
 }
 
 .h1, h1 {

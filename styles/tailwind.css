@@ -1,7 +1,31 @@
 @tailwind components;
 
 @layer components {
-    /* .app {
-        @apply relative w-full h-screen overflow-hidden;
-    } */
+    .font-poppins {
+        @apply font-["Poppins"]
+    }
+
+    .font-rubik {
+        @apply font-["Rubik"]
+    }
+
+    .contact_button {
+        @apply flex items-center justify-center gap-2 rounded-full bg-primary-red px-6 py-2 max-w-[200px] w-full
+    }
+
+    .input {
+        @apply outline-none bg-secondary-grey rounded-full px-5 py-2 w-full text-[#747C7E] placeholder:text-[#747C7E]
+    }
+
+    .franchis_input_div {
+        @apply flex flex-col items-start w-full gap-3 rounded-3xl px-8 py-3 bg-white
+    }
+
+    .franchising_input {
+        @apply font-poppins outline-none border-none text-[#A7A7A7] placeholder:text-[#A7A7A7] font-medium w-full bg-white rounded-full px-8 py-2 text-lg
+    }
+}
+
+.font-rubik-one {
+    font-family:"Rubik One", sans-serif;
 }
