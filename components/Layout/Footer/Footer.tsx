@@ -1,9 +1,7 @@
 import AppleButton from "@/icons/AppleButton";
 import PlayStoreButton from "@/icons/PlayStoreButton";
 import { LinkColProps } from "@/types/FooterTypes";
-import { getUrlObjectLink } from "@/utils/LibFunctions";
 import Image from "next/image";
-import Link from "next/link";
 import { AiFillYoutube, AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import { BsShop } from 'react-icons/bs';
 import { GrFacebookOption } from 'react-icons/gr';
@@ -109,9 +107,9 @@ const Link_Col = ({ data }: { data: LinkColProps }) => {
 
             <div className='flex flex-col gap-1'>
                 {data?.links?.map((x) => (
-                    <Link href={x?.slug} key={x?.title} className='!font-["Poppins"]'>
+                    <a href={x?.slug} key={x?.title} className='!font-["Poppins"]'>
                         {x?.title}
-                    </Link>
+                    </a>
                 ))}
             </div>
         </div>
@@ -124,19 +122,19 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Contact us',
-                slug: getUrlObjectLink('/contact-us')
+                slug: 'https://nirulas-pages.vercel.app/contact-us'
             },
             {
                 title: 'Legal',
-                slug: getUrlObjectLink('#')
+                slug: 'https://nirulas-pages.vercel.app/#'
             },
             {
                 title: 'Privacy Policy',
-                slug: getUrlObjectLink('/policy')
+                slug: 'https://nirulas-pages.vercel.app/policy'
             },
             {
                 title: 'Terms and Conditions',
-                slug: getUrlObjectLink('/terms-and-conditions')
+                slug: 'https://nirulas-pages.vercel.app/terms-and-conditions'
             },
         ]
     },
@@ -145,11 +143,11 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Franchising',
-                slug: getUrlObjectLink('/franchising')
+                slug: 'https://nirulas-pages.vercel.app/franchising'
             },
             {
                 title: 'Career',
-                slug: getUrlObjectLink('/career')
+                slug: 'https://nirulas-pages.vercel.app/career'
             },
         ]
     },
@@ -158,11 +156,11 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Home',
-                slug: getUrlObjectLink('/')
+                slug: 'https://nirulas-pages.vercel.app/'
             },
             {
                 title: 'Store Location',
-                slug: getUrlObjectLink('/contact-us')
+                slug: 'https://nirulas-pages.vercel.app/contact-us'
             },
         ]
     },
@@ -171,11 +169,11 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Full Nutrition Guide',
-                slug: getUrlObjectLink('/food')
+                slug: 'https://nirulas-pages.vercel.app/food'
             },
             {
                 title: 'Food Allergies and Sensitives',
-                slug: getUrlObjectLink('#')
+                slug: 'https://nirulas-pages.vercel.app/#'
             },
         ]
     },
