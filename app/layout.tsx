@@ -1,4 +1,8 @@
-import '../styles/globals.css';
+import Navbar from '@/components/Layout/Navbar/Navbar';
+import '@/styles/globals.css';
+import dynamic from 'next/dynamic';
+
+const Footer = dynamic(() => import('@/components/Layout/Footer/Footer'));
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -6,7 +10,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Head />
 
             <body>
+                <Navbar />
+
                 {children}
+
+                <Footer />
             </body>
         </html>
     )
