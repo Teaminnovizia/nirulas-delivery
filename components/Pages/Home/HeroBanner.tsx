@@ -5,7 +5,7 @@ const HeroBanner = () => {
         <section className='w-full'>
             <div className='w-full relative aspect-[16/5]'>
                 <Image
-                    src='/Images/home/home_slide_bg1.png'
+                    src='/Images/home/home_slide_bg1.jpeg'
                     alt='Banner'
                     quality={100}
                     fill
