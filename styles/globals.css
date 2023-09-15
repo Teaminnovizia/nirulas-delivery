@@ -49,7 +49,7 @@ body {
 	width: 100%;
 	font-family: 'Poppins', sans-serif;
 	font-size: 15px;
-	color: var(--primary-white);
+	color: var(--primary-black);
 }
 
 /* ::selection {
@@ -73,13 +73,13 @@ input[type=number] {
 
 p, button {
 	font-family: 'Poppins', sans-serif;
-	color: var(--primary-white);
+	color: var(--normal-black);
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Rubik One', sans-serif;
 	text-transform: uppercase;
-	color: var(--primary-white);
+	color: var(--primary-black);
 	font-weight: 500;
 }
 
