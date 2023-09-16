@@ -19,7 +19,7 @@ const MenuItem = ({ data }: { data: PropsType }) => {
                 />
             </div>
 
-            <div className='sm:px-8 sm:py-6 py-4 w-full space-y-2'>
+            <div className='sm:px-8 px-4 sm:py-6 py-4 w-full space-y-2'>
                 <div className='flex items-center w-full justify-between gap-4'>
                     <h4 className='font-rubik normal-case font-bold md:text-3xl text-2xl'>
                         {data.title}

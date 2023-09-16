@@ -14,7 +14,7 @@ const CategoryItem = ({ data }: { data: { _id: string, title: string, image: str
                 className='rounded-full overflow-hidden'
             />
 
-            <h5 className='font-rubik font-medium normal-case'>
+            <h5 className='font-rubik font-medium normal-case text-center'>
                 {data.title}
             </h5>
         </Link>
