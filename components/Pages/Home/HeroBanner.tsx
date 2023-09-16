@@ -13,8 +13,7 @@ const settings = {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: false,
-    nextArrow: false,
-    prevArrow: false
+    arrows: false
 };
 
 const HeroBanner = () => {
