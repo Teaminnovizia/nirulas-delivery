@@ -10,7 +10,7 @@ const SplashScreen = () => {
     useLayoutEffect(() => {
         const tl = gsap.timeline();
 
-        tl.to('#splash_1', { duration: 0.8, x: 0, width: 0, ease: Power3.easeInOut, delay: 0.5 })
+        tl.to('#splash_1', { duration: 0.8, x: 0, width: 0, ease: Power3.easeInOut, delay: 1 })
             .to('#splash_2', { duration: 0.8, x: 0, width: 0, ease: Power3.easeInOut, delay: -0.6 })
             .to('#splash_3', { duration: 0.8, x: 0, width: 0, ease: Power3.easeInOut, delay: -0.55, onComplete: () => setShow(false) })
     }, [])
