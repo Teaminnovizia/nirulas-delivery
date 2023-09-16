@@ -1,6 +1,6 @@
 const NirulasSplashScreenLogo = () => {
     return (
-        <svg className='splash_screen_logo_anim' width="414" height="103" viewBox="0 0 414 103" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className='splash_screen_logo_anim max-sm:w-[300px] max-sm:h-[85px]' width="414" height="103" viewBox="0 0 414 103" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_1699_7336)">
                 <path d="M52.6377 58.8935L31.3205 14.5065C28.0294 7.60383 22.123 3.73438 14.8024 3.73438C4.73133 3.73438 -0.015625 9.19835 -0.015625 20.1107V100.985H23.5528V45.5348L46.4297 91.5111C49.7313 98.1177 55.6273 101.987 62.2408 101.987C71.8751 101.987 76.3413 96.8244 76.3413 85.3356V5.17309H52.6377V58.8935Z" fill="white" />
                 <path d="M115.17 34.0566H94.0352V100.985H115.17V34.0566Z" fill="white" />
