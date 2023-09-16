@@ -2,6 +2,7 @@
 
 import UseLocation from '@/components/Hooks/UseLocation';
 import { getUrlObjectLink } from '@/utils/LibFunctions';
+import { nirulasWebsiteURL } from '@/utils/constants';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,7 +29,7 @@ const Navbar = () => {
         <>
             <header className={`relative w-full sm:px-8 px-3 z-[999] bg-white border-t-[16px] border-primary-red`}>
                 <nav className="flex gap-4 mx-auto max-w-6xl w-full items-center justify-between py-6">
-                    <a href='https://nirulas-pages.vercel.app' className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
+                    <a href={nirulasWebsiteURL} className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
                         <BsCaretLeftFill />
                         Home
                     </a>

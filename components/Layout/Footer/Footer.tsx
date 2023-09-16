@@ -1,6 +1,7 @@
 import AppleButton from "@/icons/AppleButton";
 import PlayStoreButton from "@/icons/PlayStoreButton";
 import { LinkColProps } from "@/types/FooterTypes";
+import { nirulasWebsiteURL } from "@/utils/constants";
 import Image from "next/image";
 import { AiFillYoutube, AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import { BsShop } from 'react-icons/bs';
@@ -122,19 +123,19 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Contact us',
-                slug: 'https://nirulas-pages.vercel.app/contact-us'
+                slug: `${nirulasWebsiteURL}/contact-us`
             },
             {
                 title: 'Legal',
-                slug: 'https://nirulas-pages.vercel.app/#'
+                slug: `${nirulasWebsiteURL}/#`
             },
             {
                 title: 'Privacy Policy',
-                slug: 'https://nirulas-pages.vercel.app/policy'
+                slug: `${nirulasWebsiteURL}/policy`
             },
             {
                 title: 'Terms and Conditions',
-                slug: 'https://nirulas-pages.vercel.app/terms-and-conditions'
+                slug: `${nirulasWebsiteURL}/terms-and-conditions`
             },
         ]
     },
@@ -143,11 +144,11 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Franchising',
-                slug: 'https://nirulas-pages.vercel.app/franchising'
+                slug: `${nirulasWebsiteURL}/franchising`
             },
             {
                 title: 'Career',
-                slug: 'https://nirulas-pages.vercel.app/career'
+                slug: `${nirulasWebsiteURL}/career`
             },
         ]
     },
@@ -156,11 +157,11 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Home',
-                slug: 'https://nirulas-pages.vercel.app/'
+                slug: `${nirulasWebsiteURL}/`
             },
             {
                 title: 'Store Location',
-                slug: 'https://nirulas-pages.vercel.app/contact-us'
+                slug: `${nirulasWebsiteURL}/contact-us`
             },
         ]
     },
@@ -169,11 +170,11 @@ const LINKS: LinkColProps[] = [
         links: [
             {
                 title: 'Full Nutrition Guide',
-                slug: 'https://nirulas-pages.vercel.app/food'
+                slug: `${nirulasWebsiteURL}/food`
             },
             {
                 title: 'Food Allergies and Sensitives',
-                slug: 'https://nirulas-pages.vercel.app/#'
+                slug: `${nirulasWebsiteURL}/#`
             },
         ]
     },

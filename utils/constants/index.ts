@@ -1,5 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
+export const nirulasWebsiteURL = 'https://nirulas-pages.vercel.app';
+
 export const CATEGORY_DATA = [
     {
         _id: uuid(),
