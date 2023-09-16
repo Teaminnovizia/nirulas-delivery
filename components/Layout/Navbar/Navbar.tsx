@@ -28,10 +28,10 @@ const Navbar = () => {
         <>
             <header className={`relative w-full sm:px-8 px-3 z-[999] bg-white border-t-[16px] border-primary-red`}>
                 <nav className="flex gap-4 mx-auto max-w-6xl w-full items-center justify-between py-6">
-                    <button className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
+                    <a href='https://nirulas-pages.vercel.app' className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
                         <BsCaretLeftFill />
                         Home
-                    </button>
+                    </a>
 
                     {/* logo */}
                     <div className='flex items-center gap-5 max-[1320px]:pl-20 max-md:p-0'>
