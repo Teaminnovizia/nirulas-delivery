@@ -1,3 +1,4 @@
+import CategoryItemContainer from "./CategoryItemContainer";
 import DownloadApp from "./DownloadApp";
 
-export { DownloadApp };
+export { CategoryItemContainer, DownloadApp };
