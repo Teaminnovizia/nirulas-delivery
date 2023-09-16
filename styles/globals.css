@@ -134,3 +134,31 @@ a {
 .h6, h6 {
 	font-size: 1rem
 }
+
+.splash_screen_logo_anim {
+	/* fill-opacity: 0; */
+	stroke-width: 3px;
+	stroke: #fff;
+	stroke-dasharray: 600;
+	animation: logo_anim 2s ease;
+}
+
+@keyframes logo_anim {
+	0% {
+		stroke-dashoffset: 600;
+		fill-opacity: 0;
+	}
+
+	60% {
+		fill-opacity: 0;
+	}
+
+	90% {
+		fill-opacity: 1;
+	}
+
+	100% {
+		stroke-dashoffset: 0;
+		fill-opacity: 1;
+	}
+}

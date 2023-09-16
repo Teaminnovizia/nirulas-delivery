@@ -1,3 +1,4 @@
+import { SplashScreen } from '@/components/Common';
 import Navbar from '@/components/Layout/Navbar/Navbar';
 import '@/styles/globals.css';
 import dynamic from 'next/dynamic';
@@ -10,6 +11,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Head />
 
             <body>
+                <SplashScreen />
+
                 <Navbar />
 
                 {children}
