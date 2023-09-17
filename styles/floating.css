@@ -1,0 +1,21 @@
+.go_up {
+    position: fixed;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    opacity: 0;
+    color: #fff;
+    background-color: var(--primary-red);
+    overflow: hidden;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.go_up:hover {
+    background-color: var(--light-red);
+}
+
+.go_up.active {
+    left: 25px;
+    opacity: 1;
+}
