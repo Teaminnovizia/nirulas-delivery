@@ -1,9 +1,5 @@
-import { SplashScreen } from '@/components/Common';
-import Navbar from '@/components/Layout/Navbar/Navbar';
+import Layout from '@/components/Layout';
 import '@/styles/globals.css';
-import dynamic from 'next/dynamic';
-
-const Footer = dynamic(() => import('@/components/Layout/Footer/Footer'));
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -11,13 +7,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Head />
 
             <body>
-                <SplashScreen />
-
-                <Navbar />
-
-                {children}
-
-                <Footer />
+                <Layout>
+                    {children}
+                </Layout>
             </body>
         </html>
     )

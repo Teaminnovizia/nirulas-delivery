@@ -1,6 +1,6 @@
 .go_up {
     position: fixed;
-    right: 10px;
+    left: 10px;
     width: 45px;
     height: 45px;
     opacity: 0;

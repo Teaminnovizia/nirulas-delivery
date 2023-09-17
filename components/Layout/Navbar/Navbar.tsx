@@ -29,7 +29,7 @@ const Navbar = () => {
 
     return (
         <>
-            <header className={`relative w-full sm:px-8 px-3 z-[999] bg-white border-t-[16px] border-primary-red`}>
+            <header className={`relative w-full sm:px-8 px-3 bg-white border-t-[16px] border-primary-red`}>
                 <nav className="flex gap-4 mx-auto max-w-6xl w-full items-center justify-between py-6">
                     {pathname === '/' ? (
                         <a href={nirulasWebsiteURL} className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
