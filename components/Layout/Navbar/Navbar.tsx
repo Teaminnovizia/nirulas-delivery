@@ -6,6 +6,7 @@ import { nirulasWebsiteURL } from '@/utils/constants';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BsCaretLeftFill } from 'react-icons/bs';
 import { MdLocationOn } from 'react-icons/md';
@@ -15,6 +16,7 @@ const SmallNav = dynamic(() => import('./SmallNav'));
 
 const Navbar = () => {
     const location = UseLocation();
+    const pathname = usePathname();
     const [show_small_nav, setShow_small_nav] = useState(false);
 
     // stopping background from scrolling while this drawer is open
@@ -29,10 +31,17 @@ const Navbar = () => {
         <>
             <header className={`relative w-full sm:px-8 px-3 z-[999] bg-white border-t-[16px] border-primary-red`}>
                 <nav className="flex gap-4 mx-auto max-w-6xl w-full items-center justify-between py-6">
-                    <a href={nirulasWebsiteURL} className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
-                        <BsCaretLeftFill />
-                        Home
-                    </a>
+                    {pathname === '/' ? (
+                        <a href={nirulasWebsiteURL} className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
+                            <BsCaretLeftFill />
+                            Home
+                        </a>
+                    ) : (
+                        <Link href='/' className='absolute left-5 hidden md:flex items-center gap-1 uppercase font-bold'>
+                            <BsCaretLeftFill />
+                            Back
+                        </Link>
+                    )}
 
                     {/* logo */}
                     <div className='flex items-center gap-5 max-[1320px]:pl-20 max-md:p-0'>
