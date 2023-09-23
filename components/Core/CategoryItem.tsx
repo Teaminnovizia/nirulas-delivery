@@ -8,7 +8,7 @@ const CategoryItem = ({ data, setClose }: { data: { _id: string, title: string, 
         <Link
             href={`/#${data._id}`} className='flex items-center flex-col w-full gap-4'
             onClick={() => {
-                if (setClose) setClose();
+                if (setClose) setClose()
             }}>
             <Image
                 src={data.image}
