@@ -28,7 +28,7 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                     quality={100}
                                     width={320}
                                     height={320}
-                                    loading='lazy'
+                                    priority
                                 // className='rounded-full overflow-visible'
                                 />
                             </div>
