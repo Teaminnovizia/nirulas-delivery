@@ -12,7 +12,7 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
             setShowPopup={setShowPopup}
         >
             {(setClose) => (
-                <div className='w-full bg-white rounded-3xl shadow-md sm:py-8 py-5 sm:px-4 px-2 max-h-[95vh] overflow-y-scroll'>
+                <div className='w-full bg-white rounded-3xl shadow-md sm:py-8 py-5 sm:px-4 px-4 max-h-[95vh] overflow-y-scroll'>
                     <div className='w-full space-y-6'>
                         <div className='w-full relative'>
                             <BsArrowLeft
@@ -76,8 +76,8 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 
                             <div className='w-full flex items-center justify-center space-x-1 flex-wrap rounded-full px-3 py-1.5 border border-[#A8A8A8] font-rubik'>
                                 <span className='text-secondary-green'>00kcal -</span>
-                                <span>00g Protein</span> •
-                                <span>00g Carbs</span> •
+                                <span>00g Protein</span> <span>•</span>
+                                <span>00g Carbs</span> <span>•</span>
                                 <span>00g Fat</span>
                             </div>
 

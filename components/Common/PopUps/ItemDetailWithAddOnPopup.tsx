@@ -13,12 +13,12 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
             setShowPopup={setShowPopup}
         >
             {(setClose) => (
-                <div className='w-full bg-white rounded-3xl shadow-md sm:py-8 py-5 sm:px-4 px-2 max-h-[95vh] overflow-y-scroll'>
+                <div className='w-full bg-white rounded-3xl shadow-md sm:py-8 py-5 sm:px-4 px-4 max-h-[95vh] overflow-y-scroll'>
                     <div className='grid md:grid-cols-2 grid-cols-1 md:auto-rows-auto w-full gap-5'>
                         <div className='w-full space-y-6 relative max-w-sm mx-auto'>
                             <BsArrowLeft
                                 onClick={() => setClose()}
-                                className='absolute -left-5 text-primary-red cursor-pointer -top-3 text-2xl'
+                                className='absolute lg:-left-5 left-0 text-primary-red cursor-pointer -top-3 text-2xl'
                             />
 
                             <div className='max-w-[80%] w-full max-md:mx-auto flex items-center max-md:justify-center justify-start'>
