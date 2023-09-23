@@ -1,14 +1,15 @@
 import StarIcon from "@/icons/StarIcon";
+import { MenuItemProps } from "@/types/MenuTypes";
 import Image from "next/image";
 import Button from "./Button";
 
-const MenuItem = ({ data }: { data: PropsType }) => {
+const MenuItem = ({ data, ...restProps }: { data: PropsType } & MenuItemProps) => {
     return (
         <div
             className='flex rounded-2xl w-full h-full bg-white flex-col gap-2 overflow-hidden'
             style={{ boxShadow: '0px 0px 20px 10px rgba(0, 0, 0, 0.02), 0px 4px 16px 3px rgba(0, 0, 0, 0.05)' }}
         >
-            <div className='relative w-full aspect-[16/8]'>
+            <div onClick={() => restProps.setShowItemDetail(true)} className='relative w-full aspect-[16/8] cursor-pointer'>
                 <Image
                     src={data.image}
                     alt={data.title}

@@ -1,6 +1,7 @@
+import { MenuItemsContainerProps } from '@/types/MenuTypes';
 import { MenuItem } from "../Core";
 
-const MenuItemsContainer = ({ data }: { data: PropsType }) => {
+const MenuItemsContainer = ({ data, ...restProps }: { data: PropsType } & MenuItemsContainerProps) => {
     return (
         <div id={data._id} className='w-full space-y-5'>
             <div className='w-full space-y-3'>
@@ -19,7 +20,11 @@ const MenuItemsContainer = ({ data }: { data: PropsType }) => {
 
             <div className='w-full grid md:grid-cols-2 grid-cols-1 auto-rows-auto gap-10'>
                 {data.items.map((x) => (
-                    <MenuItem key={x._id} data={x} />
+                    <MenuItem
+                        data={x}
+                        key={x._id}
+                        setShowItemDetail={restProps.setShowItemDetail}
+                    />
                 ))}
             </div>
         </div>

@@ -1,6 +1,5 @@
-import { MenuItemsContainer } from "@/components/Common";
+import { MenuWithItemPopups } from "@/components/Common";
 import StarIcon from "@/icons/StarIcon";
-import { CATEGORY_DATA } from "@/utils/constants";
 import Image from "next/image";
 
 const Menu = () => {
@@ -60,11 +59,7 @@ const Menu = () => {
                     </p>
                 </div>
 
-                <div className='w-full space-y-12'>
-                    {CATEGORY_DATA.filter(x => x.items.length).map((x) => (
-                        <MenuItemsContainer key={x._id} data={x} />
-                    ))}
-                </div>
+                <MenuWithItemPopups />
             </div>
         </section>
     )
