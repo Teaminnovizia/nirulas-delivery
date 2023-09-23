@@ -13,16 +13,16 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
         >
             {(setClose) => (
                 <div className='w-full bg-white rounded-3xl shadow-md sm:py-8 py-5 sm:px-4 px-2 max-h-[95vh] overflow-y-scroll'>
-                    <div className='max-w-5xl w-full mx-auto space-y-6'>
+                    <div className='w-full space-y-6'>
                         <div className='w-full relative'>
                             <BsArrowLeft
                                 onClick={() => setClose()}
                                 className='absolute left-1 text-primary-red cursor-pointer -top-3 text-2xl'
                             />
 
-                            <h1 className='sm:text-3xl text-2xl text-center sm:max-w-[65%] max-w-[80%] w-full mx-auto normal-case'>
+                            <h2 className='sm:text-3xl text-2xl text-center sm:max-w-[65%] max-w-[80%] w-full mx-auto normal-case'>
                                 Chatpata Aloo Burger
-                            </h1>
+                            </h2>
                         </div>
 
                         <div className='max-w-[80%] w-full mx-auto flex items-center justify-center'>

@@ -26,7 +26,7 @@ const MenuItem = ({ data, ...restProps }: { data: PropsType } & MenuItemProps) =
                         {data.title}
                     </h4>
 
-                    <Button title="ADD" />
+                    <Button title="ADD" onClick={() => restProps.setShowItemDetailWithAddOn(true)} />
                 </div>
 
                 <div className='flex items-center gap-4'>

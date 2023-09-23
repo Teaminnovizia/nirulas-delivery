@@ -24,6 +24,7 @@ const MenuItemsContainer = ({ data, ...restProps }: { data: PropsType } & MenuIt
                         data={x}
                         key={x._id}
                         setShowItemDetail={restProps.setShowItemDetail}
+                        setShowItemDetailWithAddOn={restProps.setShowItemDetailWithAddOn}
                     />
                 ))}
             </div>

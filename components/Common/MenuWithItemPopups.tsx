@@ -3,10 +3,11 @@
 import { MenuItemsContainer } from "@/components/Common";
 import { CATEGORY_DATA } from "@/utils/constants";
 import { useState } from 'react';
-import { ItemDetailPopup } from "./PopUps";
+import { ItemDetailPopup, ItemDetailWithAddOnPopup } from "./PopUps";
 
 const MenuWithItemPopups = () => {
     const [showItemDetailPopup, setShowItemDetailPopup] = useState(false);
+    const [showItemDetailWithAddOnPopup, setShowItemDetailWithAddOnPopup] = useState(false);
 
     return (
         <>
@@ -16,6 +17,7 @@ const MenuWithItemPopups = () => {
                         data={x}
                         key={x._id}
                         setShowItemDetail={setShowItemDetailPopup}
+                        setShowItemDetailWithAddOn={setShowItemDetailWithAddOnPopup}
                     />
                 ))}
             </div>
@@ -24,6 +26,13 @@ const MenuWithItemPopups = () => {
                 <ItemDetailPopup
                     showPopup={showItemDetailPopup}
                     setShowPopup={setShowItemDetailPopup}
+                />
+            )}
+
+            {showItemDetailWithAddOnPopup && (
+                <ItemDetailWithAddOnPopup
+                    showPopup={showItemDetailWithAddOnPopup}
+                    setShowPopup={setShowItemDetailWithAddOnPopup}
                 />
             )}
         </>
