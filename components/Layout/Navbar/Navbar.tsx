@@ -1,5 +1,6 @@
 'use client'
 
+import { LoginPopup } from '@/components/Common/PopUps';
 import UseLocation from '@/components/Hooks/UseLocation';
 import { getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
@@ -18,6 +19,7 @@ const Navbar = () => {
     const location = UseLocation();
     const pathname = usePathname();
     const [show_small_nav, setShow_small_nav] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
 
     // stopping background from scrolling while this drawer is open
     useEffect(() => {
@@ -84,7 +86,7 @@ const Navbar = () => {
                             />
                         </Link>
 
-                        <button className='font-rubik text-primary-grey'>
+                        <button onClick={() => setShowLogin(true)} className='font-rubik text-primary-grey'>
                             Login
                         </button>
 
@@ -103,6 +105,13 @@ const Navbar = () => {
                 <SmallNav
                     show_small_nav={show_small_nav}
                     setShow_small_nav={setShow_small_nav}
+                />
+            )}
+
+            {showLogin && (
+                <LoginPopup
+                    showPopup={showLogin}
+                    setShowPopup={setShowLogin}
                 />
             )}
         </>
