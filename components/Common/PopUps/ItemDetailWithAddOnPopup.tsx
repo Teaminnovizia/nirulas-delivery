@@ -60,24 +60,11 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                     Burger
                                 </h5>
 
-                                <div className='rounded-2xl p-3 border border-[#AAAAAA] space-y-2 w-fit'>
-                                    <Image
-                                        src='/Images/menu/burger-6.jpeg'
-                                        alt='Burger'
-                                        quality={100}
-                                        width={70}
-                                        height={70}
-                                        loading='lazy'
-                                    />
-
-                                    <div className='space-y-1'>
-                                        <h6 className='normal-case font-rubik font-bold text-base'>
-                                            Regular - Classic 7”
-                                        </h6>
-
-                                        <h6 className='normal-case font-rubik font-bold text-sm'>
-                                            ₹ 238
-                                        </h6>
+                                <div className='max-w-full w-full overflow-x-scroll'>
+                                    <div className='w-full flex items-center space-x-2'>
+                                        <ItemVarient />
+                                        <ItemVarient />
+                                        <ItemVarient />
                                     </div>
                                 </div>
                             </div>
@@ -109,6 +96,31 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 }
 
 export default ItemDetailWithAddOnPopup;
+
+const ItemVarient = () => {
+    return (
+        <div className='rounded-2xl p-3 border border-[#AAAAAA] space-y-2 w-fit flex-shrink-0'>
+            <Image
+                src='/Images/menu/burger-6.jpeg'
+                alt='Burger'
+                quality={100}
+                width={70}
+                height={70}
+                loading='lazy'
+            />
+
+            <div className='space-y-1'>
+                <h5 className='normal-case font-rubik font-medium text-base'>
+                    Regular - Classic 7”
+                </h5>
+
+                <h6 className='normal-case font-rubik font-medium'>
+                    ₹ 238
+                </h6>
+            </div>
+        </div>
+    )
+}
 
 const ToppingItem = () => {
     return (

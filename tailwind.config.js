@@ -32,6 +32,7 @@ module.exports = {
 				"primary-green": "var(--primary-green)",
 				"secondary-green": "var(--secondary-green)",
 				"primary-skin": "var(--primary-skin)",
+				"selected-addon-grey": "var(--selected-addon-grey)",
 			},
 			animation: {
 				'spin-slow': 'spin 20s linear infinite',
