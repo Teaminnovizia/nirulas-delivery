@@ -1,6 +1,5 @@
 'use client'
 
-import { LoginPopup } from '@/components/Common/PopUps';
 import UseLocation from '@/components/Hooks/UseLocation';
 import { getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
@@ -14,6 +13,7 @@ import { MdLocationOn } from 'react-icons/md';
 import { TbMenu2 } from 'react-icons/tb';
 
 const SmallNav = dynamic(() => import('./SmallNav'));
+const LoginPopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod?.LoginPopup));
 
 const Navbar = () => {
     const location = UseLocation();
