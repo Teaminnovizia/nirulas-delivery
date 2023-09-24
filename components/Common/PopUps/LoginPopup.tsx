@@ -1,11 +1,26 @@
-import { Button } from "@/components/Core";
 import { CommonProps } from "@/types/PopUpsTypes";
-import { useState } from 'react';
-import { PiPhoneLight } from 'react-icons/pi';
+import gsap from "gsap";
+import { FormEvent, useState } from 'react';
+import EnterOTP from "../EnterOTP";
+import LoginEnterPhone from "../LoginEnterPhone";
 import PopupContainer from "./PopupContainer";
 
 const LoginPopup = ({ showPopup, setShowPopup }: CommonProps) => {
     const [step, setStep] = useState(0);        // 0 -> enter phone no. 1 -> otp
+    const [phone, setPhone] = useState('');
+    const [otp, setOtp] = useState('');
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>, currentStep: number, setClose?: Function) => {
+        e?.preventDefault();
+
+        if (currentStep === 0) {
+            if (!phone) return;
+            gsap.to('#login_phone_form', { duration: 0.5, opacity: 0, onComplete: () => setStep(1) });
+        }
+        else if (currentStep === 1) {
+            if (setClose) setClose();
+        }
+    }
 
     return (
         <PopupContainer
@@ -17,7 +32,20 @@ const LoginPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                 <div className='w-full bg-white rounded-lg shadow-md sm:py-8 py-5 sm:px-10 px-4 max-h-[95vh] overflow-y-scroll'>
                     <div className='max-w-5xl w-full mx-auto flex flex-col items-center gap-6'>
                         {step === 0 && (
-                            <EnterPhone />
+                            <LoginEnterPhone
+                                phone={phone}
+                                setPhone={setPhone}
+                                onSubmit={onSubmit}
+                            />
+                        )}
+
+                        {step === 1 && (
+                            <EnterOTP
+                                otp={otp}
+                                setOtp={setOtp}
+                                onSubmit={onSubmit}
+                                setClose={setClose}
+                            />
                         )}
                     </div>
                 </div>
@@ -27,41 +55,3 @@ const LoginPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 }
 
 export default LoginPopup;
-
-const EnterPhone = () => {
-    return (
-        <div className='w-full space-y-12 sm:py-10 py-4'>
-            <h2 className='text-2xl text-center relative w-full normal-case font-bold font-rubik'>
-                Welcome back!
-            </h2>
-
-            <div className='w-full space-y-5'>
-                <div className='w-full space-y-3'>
-                    <label htmlFor='login_phone' className='font-rubik font-medium'>
-                        Phone
-                    </label>
-
-                    <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-[#797979]'>
-                        <PiPhoneLight className='flex-shrink-0 text-lg text-[#797979]' />
-
-                        <input
-                            type='number'
-                            id='login_phone'
-                            placeholder='Phone Number'
-                            className='w-full font-rubik text-[#797979] placeholder:text-[#797979] outline-none'
-                        />
-                    </div>
-                </div>
-
-                <Button
-                    title='OTP'
-                    className='w-full'
-                />
-            </div>
-
-            <p className='font-rubik font-normal'>
-                New to Nirula&apos;s? <button className='text-primary-red font-rubik'>Create a Account</button>
-            </p>
-        </div>
-    )
-}
