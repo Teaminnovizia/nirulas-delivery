@@ -1,8 +1,8 @@
-import { FormEvent } from "react";
+import { onSubmitType } from "@/types/LoginTypes";
 import { PiPhoneLight } from "react-icons/pi";
 import { Button } from "../Core";
 
-const LoginEnterPhone = ({ phone, setPhone, onSubmit }: { phone: string, setPhone: Function, onSubmit: (e: FormEvent<HTMLFormElement>, currentStep: number, setClose?: Function) => void }) => {
+const LoginEnterPhone = ({ phone, setPhone, onSubmit }: { phone: string, setPhone: Function, onSubmit: onSubmitType }) => {
     return (
         <div id='login_phone_form' className='w-full space-y-12 sm:py-10 py-4'>
             <h2 className='text-2xl text-center relative w-full normal-case font-bold font-rubik'>

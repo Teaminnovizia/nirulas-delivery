@@ -1,6 +1,7 @@
+import { onSubmitType } from "@/types/LoginTypes";
 import { CommonProps } from "@/types/PopUpsTypes";
 import gsap from "gsap";
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import EnterOTP from "../EnterOTP";
 import LoginEnterPhone from "../LoginEnterPhone";
 import PopupContainer from "./PopupContainer";
@@ -10,7 +11,7 @@ const LoginPopup = ({ showPopup, setShowPopup }: CommonProps) => {
     const [phone, setPhone] = useState('');
     const [otp, setOtp] = useState('');
 
-    const onSubmit = (e: FormEvent<HTMLFormElement>, currentStep: number, setClose?: Function) => {
+    const onSubmit: onSubmitType = (e, currentStep, setClose) => {
         e?.preventDefault();
 
         if (currentStep === 0) {

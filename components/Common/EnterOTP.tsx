@@ -1,12 +1,13 @@
 'use client'
 
 import SMSIcon from "@/icons/SMSIcon";
+import { onSubmitType } from "@/types/LoginTypes";
 import gsap from "gsap";
-import { FormEvent, useEffect } from "react";
+import { useEffect } from "react";
 import OTPInput from "react-otp-input";
 import { Button } from "../Core";
 
-const EnterOTP = ({ otp, setOtp, onSubmit, setClose }: { otp: string, setOtp: Function, onSubmit: (e: FormEvent<HTMLFormElement>, currentStep: number, setClose?: Function) => void, setClose?: Function }) => {
+const EnterOTP = ({ otp, setOtp, onSubmit, setClose }: { otp: string, setOtp: Function, onSubmit: onSubmitType, setClose?: Function }) => {
     useEffect(() => {
         if (window !== undefined) {
             gsap.to('#otp_form', { duration: 0.5, opacity: 1 });
