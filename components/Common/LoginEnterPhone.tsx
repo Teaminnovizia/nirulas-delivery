@@ -1,8 +1,8 @@
-import { onSubmitType } from "@/types/LoginTypes";
+import { LoginSubmitType } from "@/types/AuthTypes";
 import { PiPhoneLight } from "react-icons/pi";
 import { Button } from "../Core";
 
-const LoginEnterPhone = ({ phone, setPhone, onSubmit }: { phone: string, setPhone: Function, onSubmit: onSubmitType }) => {
+const LoginEnterPhone = ({ phone, setPhone, onSubmit }: { phone: string, setPhone: Function, onSubmit: LoginSubmitType }) => {
     return (
         <div id='login_phone_form' className='w-full space-y-12 sm:py-10 py-4'>
             <h2 className='text-2xl text-center relative w-full normal-case font-bold font-rubik'>

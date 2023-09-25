@@ -1,4 +1,4 @@
-import { onSubmitType } from "@/types/LoginTypes";
+import { LoginSubmitType } from "@/types/AuthTypes";
 import { CommonProps } from "@/types/PopUpsTypes";
 import gsap from "gsap";
 import { useState } from 'react';
@@ -11,7 +11,7 @@ const LoginPopup = ({ showPopup, setShowPopup }: CommonProps) => {
     const [phone, setPhone] = useState('');
     const [otp, setOtp] = useState('');
 
-    const onSubmit: onSubmitType = (e, currentStep, setClose) => {
+    const onSubmit: LoginSubmitType = (e, currentStep, setClose) => {
         e?.preventDefault();
 
         if (currentStep === 0) {
