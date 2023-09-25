@@ -1,5 +1,6 @@
 'use client'
 
+import { login_popup, signup_popup } from '@/atoms/index';
 import UseLocation from '@/components/Hooks/UseLocation';
 import { getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
@@ -11,15 +12,18 @@ import { useEffect, useState } from 'react';
 import { BsCaretLeftFill } from 'react-icons/bs';
 import { MdLocationOn } from 'react-icons/md';
 import { TbMenu2 } from 'react-icons/tb';
+import { useRecoilState } from 'recoil';
 
 const SmallNav = dynamic(() => import('./SmallNav'));
 const LoginPopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod?.LoginPopup));
+const SignUpPopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod?.SignUnPopup));
 
 const Navbar = () => {
     const location = UseLocation();
     const pathname = usePathname();
     const [show_small_nav, setShow_small_nav] = useState(false);
-    const [showLogin, setShowLogin] = useState(false);
+    const [showLogin, setShowLogin] = useRecoilState(login_popup);
+    const [showSignUp, setShowSignUp] = useRecoilState(signup_popup);
 
     // stopping background from scrolling while this drawer is open
     useEffect(() => {
@@ -90,7 +94,7 @@ const Navbar = () => {
                             Login
                         </button>
 
-                        <button className='font-rubik text-primary-grey'>
+                        <button onClick={() => setShowSignUp(true)} className='font-rubik text-primary-grey'>
                             Sign up
                         </button>
                     </div>
@@ -112,6 +116,13 @@ const Navbar = () => {
                 <LoginPopup
                     showPopup={showLogin}
                     setShowPopup={setShowLogin}
+                />
+            )}
+
+            {showSignUp && (
+                <SignUpPopup
+                    showPopup={showSignUp}
+                    setShowPopup={setShowSignUp}
                 />
             )}
         </>
