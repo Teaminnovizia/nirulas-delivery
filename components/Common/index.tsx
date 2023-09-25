@@ -1,3 +1,4 @@
+import BillOptionsAndPromo from "./BillOptionsAndPromo";
 import CartListItem from "./CartListItem";
 import CategoryFloatingButton from "./CategoryFloatingButton";
 import CategoryItemContainer from "./CategoryItemContainer";
@@ -13,6 +14,7 @@ import SignUpForm from "./SignUpForm";
 import SplashScreen from "./SplashScreen";
 
 export {
+    BillOptionsAndPromo,
     CartListItem,
     CategoryFloatingButton,
     CategoryItemContainer,
