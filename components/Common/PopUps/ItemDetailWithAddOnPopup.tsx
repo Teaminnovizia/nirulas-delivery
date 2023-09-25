@@ -51,7 +51,7 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                 <span className='w-full h-0.5 bg-primary-red flex-shrink-0 flex' />
 
                                 {/* <Button title='Add to cart' className='max-w-fit w-full mx-auto !mt-6' /> */}
-                                <LinkButton href='/cart-review' title='Add to cart' className='max-w-fit w-full mx-auto !mt-6' />
+                                <LinkButton href='/cart' title='Add to cart' className='max-w-fit w-full mx-auto !mt-6' />
                             </div>
                         </div>
 
