@@ -8,6 +8,7 @@ import GoUpFloatingButton from "./GoUpFloatingButton";
 import LoginEnterPhone from "./LoginEnterPhone";
 import MenuItemsContainer from "./MenuItemsContainer";
 import MenuWithItemPopups from "./MenuWithItemPopups";
+import RecommendedItem from "./RecommendedItem";
 import SignUpForm from "./SignUpForm";
 import SplashScreen from "./SplashScreen";
 
@@ -22,6 +23,7 @@ export {
     LoginEnterPhone,
     MenuItemsContainer,
     MenuWithItemPopups,
+    RecommendedItem,
     SignUpForm,
     SplashScreen
 };
