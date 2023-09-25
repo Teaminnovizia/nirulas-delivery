@@ -1,4 +1,4 @@
-import { Button, Checkbox } from "@/components/Core";
+import { Checkbox, LinkButton } from "@/components/Core";
 import GreenRectIcon from "@/icons/GreenRectIcon";
 import { CommonProps } from "@/types/PopUpsTypes";
 import Image from "next/image";
@@ -50,7 +50,8 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 
                                 <span className='w-full h-0.5 bg-primary-red flex-shrink-0 flex' />
 
-                                <Button title='Add to cart' className='max-w-fit w-full mx-auto !mt-6' />
+                                {/* <Button title='Add to cart' className='max-w-fit w-full mx-auto !mt-6' /> */}
+                                <LinkButton href='/cart-review' title='Add to cart' className='max-w-fit w-full mx-auto !mt-6' />
                             </div>
                         </div>
 

@@ -1,3 +1,4 @@
+import CartListItem from "./CartListItem";
 import CategoryFloatingButton from "./CategoryFloatingButton";
 import CategoryItemContainer from "./CategoryItemContainer";
 import DownloadApp from "./DownloadApp";
@@ -11,7 +12,16 @@ import SignUpForm from "./SignUpForm";
 import SplashScreen from "./SplashScreen";
 
 export {
-    CategoryFloatingButton, CategoryItemContainer,
-    DownloadApp, EnterEmail, EnterOTP, GoUpFloatingButton, LoginEnterPhone, MenuItemsContainer, MenuWithItemPopups, SignUpForm, SplashScreen
+    CartListItem,
+    CategoryFloatingButton,
+    CategoryItemContainer,
+    DownloadApp,
+    EnterEmail,
+    EnterOTP,
+    GoUpFloatingButton,
+    LoginEnterPhone,
+    MenuItemsContainer,
+    MenuWithItemPopups,
+    SignUpForm,
+    SplashScreen
 };
-

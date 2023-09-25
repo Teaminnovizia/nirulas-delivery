@@ -9,6 +9,10 @@
         @apply font-["Rubik"]
     }
 
+    .font-nunito {
+        @apply font-["Nunito"]
+    }
+
     .contact_button {
         @apply flex items-center justify-center gap-2 rounded-full bg-primary-red px-6 py-2 max-w-[200px] w-full
     }
