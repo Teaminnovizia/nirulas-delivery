@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 import UseSafari from '../Hooks/UseSafari';
 
-const DropDown = ({ all_choices, selected_val, onChange }: DropDownProps) => {
+const DropDown = ({ all_choices, selected_val, onChange, containerClassName }: DropDownProps) => {
     const is_safari = UseSafari();
     const drop_down = useRef(null);
     const [is_open, setIs_open] = useState(false);
@@ -30,7 +30,7 @@ const DropDown = ({ all_choices, selected_val, onChange }: DropDownProps) => {
     }
 
     return (
-        <div className='relative flex max-w-[250px] w-full h-[38.5px] items-start justify-center'>
+        <div className={`relative flex max-w-[250px] w-full h-[38.5px] items-start justify-center ${containerClassName}`}>
             <div
                 ref={drop_down}
                 className={`absolute flex w-full flex-col space-y-2 px-4 py-2 bg-primary-red text-white rounded-full h-[38.5px] outlet_select cursor-pointer overflow-hidden ${is_open ? 'z-50' : ''}`}

@@ -22,6 +22,7 @@ const BillOptionsAndPromo = () => {
                     all_choices={deliver_options}
                     selected_val={selected_delivery}
                     onChange={(newVal) => setSelected_delivery(newVal)}
+                    containerClassName='max-sm:max-w-full'
                 />
             </div>
 
@@ -34,10 +35,11 @@ const BillOptionsAndPromo = () => {
                     all_choices={tip_options}
                     selected_val={selected_tip}
                     onChange={(newVal) => setSelected_tip(newVal)}
+                    containerClassName='max-sm:max-w-full'
                 />
             </div>
 
-            <div className='flex items-center justify-center w-full'>
+            <div className='flex items-center justify-center w-full pt-4'>
                 <button className='outline-none flex items-center space-x-2 border border-[#3C3C3C] rounded-full px-4 py-2 text-[#4F4F4F] uppercase'>
                     <CiDiscount1 className='text-xl' />
 
