@@ -28,7 +28,7 @@ const PopupContainer = ({ children, ...props }: PopupContainerProps) => {
     }
 
     return (
-        <div onClick={() => setClose()} ref={popup_container_ref} className='fixed h-screen w-screen left-0 top-0 flex items-center justify-center bg-gray-200/50 z-[999] opacity-0 px-3 py-4'>
+        <div onClick={() => setClose()} ref={popup_container_ref} className='fixed h-screen w-screen left-0 top-0 flex items-center justify-center bg-gray-200/50 z-[999] opacity-0 px-3 py-4 !m-0'>
             <div onClick={(e) => e?.stopPropagation()} ref={popup_inner_ref} style={{ maxWidth: props.maxWidth }} className={`w-full mx-auto flex items-center justify-center translate-y-[100vh] opacity-0`}>
                 {children(setClose)}
             </div>

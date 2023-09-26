@@ -34,6 +34,7 @@ module.exports = {
 				"primary-skin": "var(--primary-skin)",
 				"selected-addon-grey": "var(--selected-addon-grey)",
 				"divider-grey": "var(--divider-grey)",
+				"secondary-light-red": "var(--secondary-light-red)",
 			},
 			animation: {
 				'spin-slow': 'spin 20s linear infinite',
