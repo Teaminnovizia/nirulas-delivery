@@ -1,3 +1,4 @@
+import AddedItem from "./AddedItem";
 import BillDetails from "./BillDetails";
 import BillOptionsAndPromo from "./BillOptionsAndPromo";
 import CartListItem from "./CartListItem";
@@ -11,11 +12,13 @@ import LoginEnterPhone from "./LoginEnterPhone";
 import MenuItemsContainer from "./MenuItemsContainer";
 import MenuWithItemPopups from "./MenuWithItemPopups";
 import OfferListItem from "./OfferListItem";
+import PaymentModeItem from "./PaymentModeItem";
 import RecommendedItem from "./RecommendedItem";
 import SignUpForm from "./SignUpForm";
 import SplashScreen from "./SplashScreen";
 
 export {
+    AddedItem,
     BillDetails,
     BillOptionsAndPromo,
     CartListItem,
@@ -29,6 +32,7 @@ export {
     MenuItemsContainer,
     MenuWithItemPopups,
     OfferListItem,
+    PaymentModeItem,
     RecommendedItem,
     SignUpForm,
     SplashScreen

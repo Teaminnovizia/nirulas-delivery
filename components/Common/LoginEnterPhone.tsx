@@ -21,14 +21,14 @@ const LoginEnterPhone = ({ phone, setPhone, onSubmit, setClose }: { phone: strin
                         Phone
                     </label>
 
-                    <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-[#797979]'>
-                        <PiPhoneLight className='flex-shrink-0 text-lg text-[#797979]' />
+                    <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-secondary-border-grey'>
+                        <PiPhoneLight className='flex-shrink-0 text-lg text-secondary-border-grey' />
 
                         <input
                             type='number'
                             id='login_phone'
                             placeholder='Phone Number'
-                            className='w-full font-rubik text-[#797979] placeholder:text-[#797979] outline-none'
+                            className='w-full font-rubik text-secondary-border-grey placeholder:text-secondary-border-grey outline-none'
                             value={phone}
                             onChange={(e) => setPhone(e?.target?.value)}
                             required

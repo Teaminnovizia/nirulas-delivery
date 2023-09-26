@@ -1,4 +1,4 @@
-import { Button, Divider } from "../Core";
+import { Divider, LinkButton } from "../Core";
 
 const BillDetails = () => {
     return (
@@ -104,7 +104,7 @@ const BillDetails = () => {
                     className='capitalize text-black placeholder:text-black font-medium placeholder:font-medium font-rubik rounded-lg resize-none outline-none border border-black p-2 w-full'
                 />
 
-                <Button title='confirm order' className='max-w-fit block mx-auto' />
+                <LinkButton href='/place-order' title='confirm order' className='max-w-fit block mx-auto' />
             </div>
 
             <p className='font-semibold uppercase font-rubik text-lg text-center'>

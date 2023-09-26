@@ -35,6 +35,7 @@ module.exports = {
 				"selected-addon-grey": "var(--selected-addon-grey)",
 				"divider-grey": "var(--divider-grey)",
 				"secondary-light-red": "var(--secondary-light-red)",
+				"secondary-border-grey": "var(--secondary-border-grey)",
 			},
 			animation: {
 				'spin-slow': 'spin 20s linear infinite',

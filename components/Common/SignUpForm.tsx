@@ -22,14 +22,14 @@ const SignUpForm = ({ vals, setVals, onSubmit, setClose }: { vals: SignUpVals, s
                             Phone
                         </label>
 
-                        <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-[#797979]'>
-                            <PiPhoneLight className='flex-shrink-0 text-lg text-[#797979]' />
+                        <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-secondary-border-grey'>
+                            <PiPhoneLight className='flex-shrink-0 text-lg text-secondary-border-grey' />
 
                             <input
                                 type='number'
                                 id='signup_phone'
                                 placeholder='Phone Number'
-                                className='w-full font-rubik text-[#797979] placeholder:text-[#797979] outline-none'
+                                className='w-full font-rubik text-secondary-border-grey placeholder:text-secondary-border-grey outline-none'
                                 value={vals.phone}
                                 onChange={(e) => setVals({ ...vals, phone: e?.target?.value })}
                                 required
@@ -42,14 +42,14 @@ const SignUpForm = ({ vals, setVals, onSubmit, setClose }: { vals: SignUpVals, s
                             Full Name
                         </label>
 
-                        <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-[#797979]'>
-                            <PiUserThin className='flex-shrink-0 text-lg text-[#797979]' />
+                        <div className='flex w-full items-center space-x-2 px-3 py-1.5 rounded-lg border border-secondary-border-grey'>
+                            <PiUserThin className='flex-shrink-0 text-lg text-secondary-border-grey' />
 
                             <input
                                 type='text'
                                 id='signup_name'
                                 placeholder='Full Name'
-                                className='w-full font-rubik text-[#797979] placeholder:text-[#797979] outline-none'
+                                className='w-full font-rubik text-secondary-border-grey placeholder:text-secondary-border-grey outline-none'
                                 value={vals.full_name}
                                 onChange={(e) => setVals({ ...vals, full_name: e?.target?.value })}
                                 required

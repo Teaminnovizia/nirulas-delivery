@@ -29,7 +29,7 @@ const EnterOTP = ({ otp, setOtp, onSubmit, setClose }: { otp: string, setOtp: Fu
             </h4>
 
             <div className='w-full space-y-1'>
-                <p className='font-rubik text-[#797979] text-sm font-medium'>
+                <p className='font-rubik text-secondary-border-grey text-sm font-medium'>
                     Please enter the code we text you.
                 </p>
 

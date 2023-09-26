@@ -18,3 +18,9 @@ export interface DropDownProps {
     onChange: (newVal: string) => void
     containerClassName?: string
 }
+
+export interface DividerProps {
+    className?: string
+    title?: string
+    titleClassName?: string
+}
