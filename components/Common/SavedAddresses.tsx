@@ -1,14 +1,22 @@
 'use client'
 
 import { AddressSubmitType } from "@/types/PopUpsTypes";
+import gsap from "gsap";
+import { useEffect } from "react";
 import { BsCheck2Circle } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { Button, Divider } from "../Core";
 
 const SavedAddresses = ({ onSubmit, setClose }: { onSubmit: AddressSubmitType, setClose: Function }) => {
+    useEffect(() => {
+        if (window !== undefined) {
+            gsap.to('#saved_addresses', { duration: 0.5, opacity: 1 });
+        }
+    }, [])
+
     return (
-        <div id='signup_phone_form' className='w-full space-y-6'>
+        <div id='saved_addresses' className='w-full space-y-6'>
             <h2 className='text-2xl font-bold font-rubik'>
                 Saved Addresses
             </h2>

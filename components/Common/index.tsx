@@ -1,4 +1,5 @@
 import AddedItem from "./AddedItem";
+import AddressForm from "./AddressForm";
 import BillDetails from "./BillDetails";
 import BillOptionsAndPromo from "./BillOptionsAndPromo";
 import CartListItem from "./CartListItem";
@@ -20,6 +21,7 @@ import SplashScreen from "./SplashScreen";
 
 export {
     AddedItem,
+    AddressForm,
     BillDetails,
     BillOptionsAndPromo,
     CartListItem,

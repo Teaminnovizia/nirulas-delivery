@@ -1,6 +1,7 @@
 import { AddressSubmitType, CommonProps } from "@/types/PopUpsTypes";
 import gsap from "gsap";
 import { useState } from "react";
+import AddressForm from "../AddressForm";
 import SavedAddresses from "../SavedAddresses";
 import PopupContainer from "./PopupContainer";
 
@@ -32,14 +33,12 @@ const AddressUpdatePopup = ({ showPopup, setShowPopup }: CommonProps) => {
                             />
                         )}
 
-                        {/* {step === 1 && (
-                            <EnterEmail
-                                vals={vals}
-                                setVals={setVals}
+                        {step === 1 && (
+                            <AddressForm
                                 onSubmit={onSubmit}
                                 setClose={setClose}
                             />
-                        )} */}
+                        )}
                     </div>
                 </div>
             )}
