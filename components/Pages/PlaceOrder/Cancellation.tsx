@@ -1,4 +1,4 @@
-import { Button, Divider } from "@/components/Core";
+import { Divider, LinkButton } from "@/components/Core";
 
 const Cancellation = () => {
     return (
@@ -11,7 +11,7 @@ const Cancellation = () => {
                     Avoid cancellation as it leads to food wastage.
                 </p>
 
-                <Button title='Place Order' className='max-w-fit mx-auto block !mt-10' />
+                <LinkButton href='/transaction' title='Place Order' className='max-w-fit mx-auto block !mt-10' />
             </div>
         </section>
     )
