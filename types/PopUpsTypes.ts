@@ -9,3 +9,5 @@ export interface PopupContainerProps extends CommonProps {
     children(setClose: Function): ReactElement
     maxWidth: number | string
 }
+
+export type AddressSubmitType = (currentStep: number, setClose?: Function) => void;

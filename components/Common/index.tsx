@@ -14,6 +14,7 @@ import MenuWithItemPopups from "./MenuWithItemPopups";
 import OfferListItem from "./OfferListItem";
 import PaymentModeItem from "./PaymentModeItem";
 import RecommendedItem from "./RecommendedItem";
+import SavedAddresses from "./SavedAddresses";
 import SignUpForm from "./SignUpForm";
 import SplashScreen from "./SplashScreen";
 
@@ -34,6 +35,7 @@ export {
     OfferListItem,
     PaymentModeItem,
     RecommendedItem,
+    SavedAddresses,
     SignUpForm,
     SplashScreen
 };
