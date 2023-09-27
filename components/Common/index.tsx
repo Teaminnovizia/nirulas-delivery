@@ -18,6 +18,7 @@ import RecommendedItem from "./RecommendedItem";
 import SavedAddresses from "./SavedAddresses";
 import SignUpForm from "./SignUpForm";
 import SplashScreen from "./SplashScreen";
+import Weather from "./Weather";
 
 export {
     AddedItem,
@@ -39,5 +40,6 @@ export {
     RecommendedItem,
     SavedAddresses,
     SignUpForm,
-    SplashScreen
+    SplashScreen,
+    Weather
 };

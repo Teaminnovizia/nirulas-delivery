@@ -36,6 +36,7 @@ module.exports = {
 				"divider-grey": "var(--divider-grey)",
 				"secondary-light-red": "var(--secondary-light-red)",
 				"secondary-border-grey": "var(--secondary-border-grey)",
+				"primary-slate-blue": "var(--primary-slate-blue)",
 			},
 			animation: {
 				'spin-slow': 'spin 20s linear infinite',
