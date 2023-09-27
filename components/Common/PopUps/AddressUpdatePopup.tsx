@@ -25,7 +25,7 @@ const AddressUpdatePopup = ({ showPopup, setShowPopup }: CommonProps) => {
         >
             {(setClose) => (
                 <div className='w-full bg-white rounded-3xl shadow-md sm:py-8 py-5 sm:px-10 px-4 max-h-[95vh] overflow-y-scroll'>
-                    <div className='max-w-5xl w-full mx-auto flex flex-col items-center gap-6'>
+                    <div className='max-w-5xl w-full mx-auto flex flex-col items-center space-y-6'>
                         {step === 0 && (
                             <SavedAddresses
                                 onSubmit={onSubmit}

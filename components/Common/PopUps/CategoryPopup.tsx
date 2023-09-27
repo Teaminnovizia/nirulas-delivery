@@ -12,7 +12,7 @@ const CategoryPopup = ({ showPopup, setShowPopup }: CommonProps) => {
         >
             {(setClose) => (
                 <div className='w-full bg-white rounded-2xl shadow-md sm:py-8 py-5 sm:px-4 px-2 max-h-[95vh] overflow-y-scroll'>
-                    <div className='max-w-5xl w-full mx-auto flex flex-col items-center gap-6'>
+                    <div className='max-w-5xl w-full mx-auto flex flex-col items-center space-y-6'>
                         <h2 className='sm:text-3xl text-2xl text-center relative w-full max-sm:mt-4'>
                             <BsArrowLeft
                                 onClick={() => setClose()}
