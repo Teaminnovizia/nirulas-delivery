@@ -1,11 +1,38 @@
 import { Checkbox, LinkButton } from "@/components/Core";
 import GreenRectIcon from "@/icons/GreenRectIcon";
 import { CommonProps } from "@/types/PopUpsTypes";
+import { BaseUrl } from "@/utils/constants";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import PopupContainer from "./PopupContainer";
 
-const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
+const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup, productInfo }: CommonProps) => {
+    const [selectedBase, setSelectedbase] = useState<any>(null);
+    const [baseData, setBaseData] = useState<any>(null);
+
+    useEffect(() => {
+        if(productInfo) {
+            var _bases = productInfo.customize_data.find((cd: any) => cd.is_base);
+            if(_bases?.item) {
+                var _selected_base = _bases?.item?.find((bt: any) => bt?.price == productInfo?.price);
+                setSelectedbase(_selected_base);
+            }
+            setBaseData(_bases);
+        }
+    }, [productInfo])
+
+    useEffect(() => {
+        if(selectedBase) {
+            // after base select logic
+        }
+    }, [selectedBase])
+
+    function onBaseclick(_base: any) {
+        alert(JSON.stringify(_base));
+        setSelectedbase(_base);
+    }
+
     return (
         <PopupContainer
             maxWidth='1000px'
@@ -23,7 +50,7 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 
                             <div className='max-w-[80%] w-full max-md:mx-auto flex items-center max-md:justify-center justify-start'>
                                 <Image
-                                    src='/Images/menu/burger-5.png'
+                                    src={`${BaseUrl}public${productInfo?.thumbnail}`}
                                     alt='Burger'
                                     quality={100}
                                     width={320}
@@ -35,17 +62,17 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 
                             <div>
                                 <h2 className='text-2xl text-left font-rubik'>
-                                    Chatpata Aloo Burger
+                                    {productInfo?.name}
                                 </h2>
 
                                 <h2 className='text-2xl text-left font-rubik'>
-                                    ₹ 99
+                                    ₹ {productInfo?.price}
                                 </h2>
                             </div>
 
                             <div className='w-full space-y-3'>
                                 <p className='font-rubik text-normal-grey text-justify capitalize text-[13px]'>
-                                    Craving for something Chatpata? Get your lips smacking with the zesty patty made fresh in-house with locally sourced Potatoes and Vegetables. Seasoned with spices and flavoured with home made Tamarind Sauce and Southwest Chilli Sauce. Feel the Zing!
+                                    {productInfo?.clean_description}
                                 </p>
 
                                 <span className='w-full h-0.5 bg-primary-red flex-shrink-0 flex' />
@@ -58,14 +85,19 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                         <div className='w-full space-y-6 max-w-sm mx-auto'>
                             <div className='w-full space-y-4'>
                                 <h5 className='normal-case font-rubik font-bold'>
-                                    Burger
+                                    {/* Burger */}
+                                    Customize
                                 </h5>
 
                                 <div className='max-w-full w-full overflow-x-scroll'>
                                     <div className='w-full flex items-center space-x-2'>
+                                        {
+                                            baseData?.item?.map((base: any, i: number) => <ItemVarient base={base} key={i} onClick={onBaseclick} selectedBase={selectedBase} />)
+                                        }
+                                        {/* <ItemVarient />
                                         <ItemVarient />
                                         <ItemVarient />
-                                        <ItemVarient />
+                                        <ItemVarient /> */}
                                     </div>
                                 </div>
                             </div>
@@ -98,9 +130,9 @@ const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 
 export default ItemDetailWithAddOnPopup;
 
-const ItemVarient = () => {
+const ItemVarient = ({ base, selectedBase, onClick }: { base: any, selectedBase: any, onClick: Function }) => {
     return (
-        <div className='rounded-2xl p-3 border border-[#AAAAAA] space-y-2 w-fit flex-shrink-0'>
+        <div className={`rounded-2xl p-3 border border-[#AAAAAA] space-y-2 w-fit flex-shrink-0 cursor-pointer ${selectedBase.id == base.id && 'bg-red-300'}`} onClick={() => onClick(base)}>
             <Image
                 src='/Images/menu/burger-6.jpeg'
                 alt='Burger'
@@ -112,12 +144,15 @@ const ItemVarient = () => {
 
             <div className='space-y-1'>
                 <h5 className='normal-case font-rubik font-medium text-base'>
-                    Regular - Classic 7”
+                    {base?.title}
                 </h5>
 
-                <h6 className='normal-case font-rubik font-medium'>
-                    ₹ 238
-                </h6>
+                {
+                    base?.show_price && <h6 className='normal-case font-rubik font-medium'>
+                        ₹ {base?.price}
+                    </h6>
+                }
+                
             </div>
         </div>
     )

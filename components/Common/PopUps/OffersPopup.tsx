@@ -1,8 +1,21 @@
+import { cart_atom } from "@/atoms/index";
 import { CommonProps } from "@/types/PopUpsTypes";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import OfferListItem from "../OfferListItem";
 import PopupContainer from "./PopupContainer";
 
-const OffersPopup = ({ showPopup, setShowPopup }: CommonProps) => {
+const OffersPopup = ({ dealsData, applyCoupon, isFromCart, ...restProps }: { dealsData: any[], applyCoupon: Function, isFromCart: boolean } & CommonProps) => {
+    const { showPopup, setShowPopup } = restProps;
+    const [couponApplied, setCouponApplied] = useState(false);
+    const CartData = useRecoilValue(cart_atom);
+
+    useEffect(() => {
+        if(CartData.offer_id) {
+            setCouponApplied(true);
+        }
+    }, [CartData])
+
     return (
         <PopupContainer
             maxWidth='550px'
@@ -17,11 +30,12 @@ const OffersPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                         </h4>
 
                         <div className='w-full space-y-4 max-h-[75vh] overflow-y-scroll'>
-                            <OfferListItem />
-                            <OfferListItem />
-                            <OfferListItem />
-                            <OfferListItem />
-                            <OfferListItem />
+                            {
+                                Array.isArray(dealsData) && dealsData.map(
+                                    (deal, index) => <OfferListItem deal={deal} key={index} couponApplied={couponApplied} applyCoupon={applyCoupon} />
+                                )
+                            }
+                            {/* <OfferListItem /> */}
                         </div>
                     </div>
                 </div>

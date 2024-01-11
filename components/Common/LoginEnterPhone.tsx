@@ -9,6 +9,7 @@ import { Button } from "../Core";
 const LoginEnterPhone = ({ phone, setPhone, onSubmit, setClose }: { phone: string, setPhone: Function, onSubmit: LoginSubmitType, setClose: Function }) => {
     const setShowSignUp = useSetRecoilState(signup_popup);
 
+
     return (
         <div id='login_phone_form' className='w-full space-y-12 sm:py-10 py-4'>
             <h2 className='text-2xl text-center relative w-full normal-case font-bold font-rubik'>

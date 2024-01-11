@@ -1,9 +1,12 @@
+import { categories_atom } from "@/atoms/index";
 import { CommonProps } from "@/types/PopUpsTypes";
 import { BsArrowLeft } from "react-icons/bs";
+import { useRecoilValue } from "recoil";
 import CategoryItemContainer from "../CategoryItemContainer";
 import PopupContainer from "./PopupContainer";
 
 const CategoryPopup = ({ showPopup, setShowPopup }: CommonProps) => {
+    const Categories = useRecoilValue(categories_atom);
     return (
         <PopupContainer
             maxWidth='1152px'
@@ -22,7 +25,7 @@ const CategoryPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                             Never Stop MuNching!
                         </h2>
 
-                        <CategoryItemContainer setClose={setClose} />
+                        <CategoryItemContainer setClose={setClose} Categories={Categories} />
                     </div>
                 </div>
             )}

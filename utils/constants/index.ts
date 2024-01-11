@@ -1,6 +1,17 @@
 import { v4 as uuid } from 'uuid';
 
 export const nirulasWebsiteURL = 'https://nirulas.com';
+export const BaseUrl = 'https://api2.nirulas.com/nirulas-api/';
+
+export const ConfigData = {
+    "SITE_NAME": "Nirulas",
+    "site_description": "Nirulas",
+    "CONTACT": "1800-1025247",
+    "GOOGLE_KEY": "AIzaSyBcWkVHVvjlyKpqT3POw-32IsfGnTFElqE",
+    "RP_KEY_ID": "rzp_live_E7Q9VruGoJcuhi",
+    "RP_KEY_SECRET": "n11U93PljxQ5zlzDCtVu6wnA",
+    "Admin_Unique": "i_am_nirulas",
+}
 
 export const CATEGORY_DATA = [
     {

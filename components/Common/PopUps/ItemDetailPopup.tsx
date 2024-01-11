@@ -1,10 +1,11 @@
 import { Button } from "@/components/Core";
 import { CommonProps } from "@/types/PopUpsTypes";
+import { BaseUrl } from "@/utils/constants";
 import Image from "next/image";
 import { BsArrowLeft } from "react-icons/bs";
 import PopupContainer from "./PopupContainer";
 
-const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
+const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo }: CommonProps) => {
     return (
         <PopupContainer
             maxWidth='520px'
@@ -21,14 +22,14 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                             />
 
                             <h2 className='sm:text-3xl text-2xl text-center sm:max-w-[65%] max-w-[80%] w-full mx-auto normal-case'>
-                                Chatpata Aloo Burger
+                                {productInfo?.name}
                             </h2>
                         </div>
 
                         <div className='max-w-[80%] w-full mx-auto flex items-center justify-center'>
                             <Image
-                                src='/Images/menu/burger-5.png'
-                                alt='Burger'
+                                src={`${BaseUrl}public${productInfo?.thumbnail}`}
+                                alt={productInfo?.name}
                                 quality={100}
                                 width={250}
                                 height={250}
@@ -49,7 +50,7 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                     </p>
 
                                     <h6 className='normal-case font-rubik font-bold'>
-                                        Medium
+                                        -
                                     </h6>
                                 </div>
 
@@ -59,7 +60,7 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                     </p>
 
                                     <h6 className='normal-case font-rubik font-bold'>
-                                        400gm
+                                        -
                                     </h6>
                                 </div>
 
@@ -69,16 +70,16 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                     </p>
 
                                     <h6 className='normal-case font-rubik font-bold'>
-                                        ₹ 249
+                                        ₹{productInfo?.price}
                                     </h6>
                                 </div>
                             </div>
 
                             <div className='w-full flex items-center justify-center space-x-1 flex-wrap rounded-full px-3 py-1.5 border border-[#A8A8A8] font-rubik'>
-                                <span className='text-secondary-green'>00kcal -</span>
-                                <span>00g Protein</span> <span>•</span>
-                                <span>00g Carbs</span> <span>•</span>
-                                <span>00g Fat</span>
+                                <span className='text-secondary-green'>{productInfo?.energy || '0'}kcal -</span>
+                                <span>{productInfo?.protein || '0'} Protein</span> <span>•</span>
+                                <span>{productInfo?.carbohydrates || '0'} Carbs</span> <span>•</span>
+                                <span>{productInfo?.fat || '0'} Fat</span>
                             </div>
 
                             <h6 className='normal-case font-rubik font-bold'>
@@ -86,7 +87,7 @@ const ItemDetailPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                             </h6>
 
                             <p className='font-rubik text-normal-grey text-justify'>
-                                100 grams of mushrooms, olives, bell peppers, pizza cheese , see more...
+                                {productInfo?.clean_description}
                             </p>
 
                             <Button title='Add to cart' className='max-w-fit w-full mx-auto' />

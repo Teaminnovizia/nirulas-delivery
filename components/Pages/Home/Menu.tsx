@@ -1,8 +1,23 @@
+'use client'
+
 import { MenuWithItemPopups } from "@/components/Common";
 import StarIcon from "@/icons/StarIcon";
+import { getMenuWithProducts } from "@/utils/LibFunctions";
 import Image from "next/image";
+import { useEffect, useState } from 'react';
 
 const Menu = () => {
+    const [MenuProductData, setMenuProductData] = useState<any[]>([]);
+
+    useEffect(() => {
+        getMenuWithProducts()
+        .then(data => {
+            console.log(data);
+            setMenuProductData(data);
+        })
+        .catch(e => console.log(e));
+    }, [])
+
     return (
         <section className='w-full sm:px-8 px-3'>
             <div className='flex flex-col items-center gap-5 max-w-6xl w-full mx-auto sm:py-8 py-4'>
@@ -59,7 +74,7 @@ const Menu = () => {
                     </p>
                 </div>
 
-                <MenuWithItemPopups />
+                <MenuWithItemPopups MenuProductData={MenuProductData} />
             </div>
         </section>
     )

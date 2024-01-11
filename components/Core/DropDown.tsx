@@ -37,7 +37,7 @@ const DropDown = ({ all_choices, selected_val, onChange, containerClassName }: D
                 onClick={() => onDropDownClick(!is_open)}
             >
                 <span className={`flex w-full items-center justify-between space-x-2 ${is_safari ? is_open ? 'mt-[8px]' : 'mt-[10px]' : 'mt-0'}`}>
-                    <p className='text-white font-rubik'>
+                    <p className='text-white font-rubik capitalize'>
                         {selected_val}
                     </p>
 
@@ -49,7 +49,7 @@ const DropDown = ({ all_choices, selected_val, onChange, containerClassName }: D
                         <p
                             key={x}
                             onClick={() => onChange(x)}
-                            className='w-full text-left font-rubik text-white'
+                            className='w-full text-left font-rubik text-white capitalize'
                         >
                             {x}
                         </p>

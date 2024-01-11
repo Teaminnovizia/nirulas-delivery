@@ -1,6 +1,7 @@
-import { Divider, LinkButton } from "@/components/Core";
+import { Button, Divider } from "@/components/Core";
+import { getCookie } from "cookies-next";
 
-const Cancellation = () => {
+const Cancellation = ({ placeOrderSubmit }: { placeOrderSubmit: Function }) => {
     return (
         <section className='w-full sm:px-8 px-3'>
             <div className='w-full space-y-6 py-8 max-w-6xl mx-auto'>
@@ -11,7 +12,13 @@ const Cancellation = () => {
                     Avoid cancellation as it leads to food wastage.
                 </p>
 
-                <LinkButton href='/transaction' title='Place Order' className='max-w-fit mx-auto block !mt-10' />
+                {
+                    getCookie("otp_verified") === "yes" &&
+                    // <LinkButton href='/transaction' title='Place Order' className='max-w-fit mx-auto block !mt-10' />
+                    <div className="flex items-center justify-center">
+                        <Button title="Place Order" onClick={() => placeOrderSubmit()}>Place Order</Button>
+                    </div>
+                }
             </div>
         </section>
     )

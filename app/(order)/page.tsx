@@ -1,3 +1,5 @@
+"use client"
+
 import '@/styles/floating.css';
 import dynamic from "next/dynamic";
 

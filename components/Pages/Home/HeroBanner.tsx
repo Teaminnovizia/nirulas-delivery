@@ -1,6 +1,9 @@
 'use client';
 
+import { getHomeSliders } from "@/utils/LibFunctions";
+import { BaseUrl } from "@/utils/constants";
 import Image from "next/image";
+import { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -17,14 +20,24 @@ const settings = {
 };
 
 const HeroBanner = () => {
+    const [Sliders, setSliders] = useState<any[]>([]);
+
+    useEffect(() => {
+        getHomeSliders()
+        .then(data => {
+            // console.log(data);
+            setSliders(data);
+        })
+        .catch(e => console.log(e));
+    }, [])
     return (
         <section className='w-full'>
             <Slider {...settings} className='w-full'>
-                {DATA?.map((x) => (
+                {Sliders?.map((x) => (
                     <div key={x?.alt} className='w-full relative aspect-[16/5]'>
                         <Image
-                            src={x?.image}
-                            alt={x?.alt}
+                            src={BaseUrl + "public" + x?.desktop_banner}
+                            alt={x?.name}
                             quality={100}
                             fill
                             priority

@@ -1,6 +1,6 @@
-import { Divider, TextArea } from "@/components/Core";
+import { Divider, Input, TextArea } from "@/components/Core";
 
-const Instructions = () => {
+const Instructions = ({ onChange, formValues }: { onChange: Function, formValues: any }) => {
     return (
         <section className='w-full sm:px-8 px-3'>
             <div className='w-full space-y-6 py-8 max-w-6xl mx-auto'>
@@ -12,6 +12,8 @@ const Instructions = () => {
                         required
                         placeholder='add cooking instructions'
                         className='resize-none'
+                        value={formValues?.instruction}
+                        onChange={e => onChange('instruction', e.target.value)}
                     />
 
                     <div className='w-full space-y-2'>
@@ -25,16 +27,38 @@ const Instructions = () => {
 
                         <div className='flex items-center justify-center w-full space-x-4'>
                             <div className='flex items-center space-x-2'>
-                                <input type='radio' id='gift_yes' name='gift' className='outline-none border-none accent-primary-red' />
+                                <input type='radio' id='gift_yes' name='gift' checked={formValues?.gift == 'yes'} onChange={() => onChange('gift', 'yes')} className='outline-none border-none accent-primary-red' />
                                 <label htmlFor='gift_yes' className='font-rubik'>Yes</label>
                             </div>
 
                             <div className='flex items-center space-x-2'>
-                                <input type='radio' id='gift_no' name='gift' className='outline-none border-none accent-primary-red' />
+                                <input type='radio' id='gift_no' name='gift' checked={formValues?.gift == 'no'} onChange={() => {onChange('gift', 'no'); onChange('receiver_name', null);}} className='outline-none border-none accent-primary-red' />
                                 <label htmlFor='gift_no' className='font-rubik'>No</label>
                             </div>
                         </div>
                     </div>
+                    {
+                        formValues?.gift == 'yes'
+                            ?
+                            <>
+                                <div className="grid">
+                                    <label>Receiver Name :</label>
+                                    <Input
+                                        type='text'
+                                        placeholder='Receiver Name'
+                                        required
+                                        value={formValues?.receiver_name}
+                                        onChange={e => onChange('receiver_name', e.target.value)}
+                                    />
+                                    {/* <input type="text" name="receiver_name" id="receiver_name" onChange={} className={"form-control"} /> */}
+                                    {/* {
+                                        errors.receiver_name ? <p className="error">This field is required</p> : null
+                                    } */}
+                                </div>
+                            </>
+                            :
+                            null
+                    }
                 </div>
             </div>
         </section>

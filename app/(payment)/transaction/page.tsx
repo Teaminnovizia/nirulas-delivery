@@ -1,3 +1,5 @@
+"use client"
+
 import dynamic from "next/dynamic";
 
 const Payment = dynamic(() => import('@/components/Pages/Transaction/Payment'));

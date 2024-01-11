@@ -1,6 +1,7 @@
 'use client'
 
-import { login_popup, signup_popup } from '@/atoms/index';
+import { cart_atom, location_atom, login_popup, signup_popup } from '@/atoms/index';
+import LocationPopup from '@/components/Common/PopUps/LocationPopup';
 import UseLocation from '@/components/Hooks/UseLocation';
 import { getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
@@ -12,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { BsCaretLeftFill } from 'react-icons/bs';
 import { MdLocationOn } from 'react-icons/md';
 import { TbMenu2 } from 'react-icons/tb';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const SmallNav = dynamic(() => import('./SmallNav'));
 const LoginPopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod?.LoginPopup));
@@ -20,8 +21,11 @@ const SignUpPopup = dynamic(() => import('@/components/Common/PopUps').then(mod 
 
 const Navbar = () => {
     const location = UseLocation();
+    const address = useRecoilValue(location_atom);
+    const CartData = useRecoilValue(cart_atom);
     const pathname = usePathname();
     const [show_small_nav, setShow_small_nav] = useState(false);
+    const [showLocation, setShowLocation] = useState(false);
     const [showLogin, setShowLogin] = useRecoilState(login_popup);
     const [showSignUp, setShowSignUp] = useRecoilState(signup_popup);
 
@@ -62,24 +66,26 @@ const Navbar = () => {
                             />
                         </Link>
 
-                        <div className='flex items-start gap-1'>
+                        <div className='flex items-start gap-1 cursor-pointer' onClick={() => setShowLocation(true)}>
                             <MdLocationOn className='text-grey-red text-xl' />
 
                             <div>
                                 <p className='text-primary-grey font-rubik font-medium max-sm:text-xs max-md:text-sm'>
-                                    {location || 'Ymca, 1, Ashoka Rd, Hanu'}
+                                    {/* {location || 'Ymca, 1, Ashoka Rd, Hanu'} */}
+                                    {address || 'Pin Your Location'}
                                 </p>
 
-                                <p className='text-primary-grey font-rubik font-medium max-sm:text-xs max-md:text-sm'>
+                                {/* <p className='text-primary-grey font-rubik font-medium max-sm:text-xs max-md:text-sm'>
                                     Add Your Address
-                                </p>
+                                </p> */}
                             </div>
                         </div>
                     </div>
 
                     {/* links */}
                     <div className={`hidden lg:flex items-center gap-8 text-base font-medium uppercase`}>
-                        <Link href={getUrlObjectLink('/cart')} className='font-rubik text-primary-grey'>
+                        <Link href={getUrlObjectLink('/cart')} className='font-rubik text-primary-grey relative'>
+                            <p className='text-primary-red absolute bottom-3 -right-1'>{CartData?.carts_items?.length}</p>
                             <Image
                                 src='/Images/icons/icecream-stall.png'
                                 alt='Cart'
@@ -123,6 +129,13 @@ const Navbar = () => {
                 <SignUpPopup
                     showPopup={showSignUp}
                     setShowPopup={setShowSignUp}
+                />
+            )}
+
+            {showLocation && (
+                <LocationPopup
+                    showPopup={showLocation}
+                    setShowPopup={setShowLocation}
                 />
             )}
         </>
