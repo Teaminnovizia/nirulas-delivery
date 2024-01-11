@@ -21,7 +21,7 @@ const AddedItems = ({ CartData }: { CartData: any }) => {
                     <AddedItem /> */}
                     
                     {
-                        Array.isArray(CartData?.carts_items) && CartData?.carts_items.map((ci: any, i: number) => <AddedItem data={ci} index={i + 1} />)
+                        Array.isArray(CartData?.carts_items) && CartData?.carts_items.map((ci: any, i: number) => <AddedItem data={ci} index={i + 1} key={i} />)
                     }
                 </div>
 

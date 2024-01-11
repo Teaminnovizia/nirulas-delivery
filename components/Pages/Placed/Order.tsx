@@ -42,7 +42,7 @@ const Order = ({ isOrderData }: { isOrderData: IOrder | null }) => {
                     {
                         Array.isArray(isOrderData?.orders_items) &&
                         isOrderData?.orders_items.map((order: any, i: number) => {
-                            return <div className='w-full flex items-center justify-between space-x-4'>
+                            return <div className='w-full flex items-center justify-between space-x-4' key={i}>
                                 <p className='font-rubik text-sm font-normal normal-case text-[#313131]'>
                                     {order.product_name}
                                 </p>

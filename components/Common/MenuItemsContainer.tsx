@@ -41,8 +41,8 @@ const MenuItemsContainer = ({ data, addToCart, ...restProps }: { data: PropsType
             </div>
             <div className='flex flex-wrap items-center gap-1'>
                 {
-                    data.sub_menus.map(sm => (
-                        <div className='flex'>
+                    data.sub_menus.map((sm, i: number) => (
+                        <div className='flex' key={i}>
                             <button className={`px-2 py-1 ring-2 rounded ${selectedSubmenuId != sm.id && "shadow-md ring-0"}`} onClick={() => onClick(sm.id)}>{sm.title}</button>
                         </div>
                     ))
