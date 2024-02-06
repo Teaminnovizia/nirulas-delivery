@@ -1,6 +1,9 @@
 import { Divider, Input, TextArea } from "@/components/Core";
+import { PlaceOrderProps } from "@/types/PlaceOrderProps";
 
-const Instructions = ({ onChange, formValues }: { onChange: Function, formValues: any }) => {
+type onChangeProps = (field: string, value: any) => void
+
+const Instructions = ({ onChange, formValues }: { onChange: onChangeProps, formValues: PlaceOrderProps }) => {
     return (
         <section className='w-full sm:px-8 px-3'>
             <div className='w-full space-y-6 py-8 max-w-6xl mx-auto'>
@@ -27,12 +30,12 @@ const Instructions = ({ onChange, formValues }: { onChange: Function, formValues
 
                         <div className='flex items-center justify-center w-full space-x-4'>
                             <div className='flex items-center space-x-2'>
-                                <input type='radio' id='gift_yes' name='gift' checked={formValues?.gift == 'yes'} onChange={() => onChange('gift', 'yes')} className='outline-none border-none accent-primary-red' />
+                                <input type='radio' id='gift_yes' name='gift_yes' checked={formValues?.gift == 'yes'} onChange={() => onChange('gift', 'yes')} className='outline-none border-none accent-primary-red' />
                                 <label htmlFor='gift_yes' className='font-rubik'>Yes</label>
                             </div>
 
                             <div className='flex items-center space-x-2'>
-                                <input type='radio' id='gift_no' name='gift' checked={formValues?.gift == 'no'} onChange={() => {onChange('gift', 'no'); onChange('receiver_name', null);}} className='outline-none border-none accent-primary-red' />
+                                <input type='radio' id='gift_no' name='gift_no' checked={formValues?.gift == 'no'} onChange={() => {onChange('gift', 'no')}} className='outline-none border-none accent-primary-red' />
                                 <label htmlFor='gift_no' className='font-rubik'>No</label>
                             </div>
                         </div>

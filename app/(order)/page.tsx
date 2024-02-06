@@ -8,6 +8,7 @@ const Category = dynamic(() => import('@/components/Pages/Home/Category'));
 const Menu = dynamic(() => import('@/components/Pages/Home/Menu'));
 const GoUpFloatingButton = dynamic(() => import('@/components/Common').then(mod => mod.GoUpFloatingButton));
 const CategoryFloatingButton = dynamic(() => import('@/components/Common').then(mod => mod.CategoryFloatingButton));
+const CartFloatingButton = dynamic(() => import('@/components/Common').then(mod => mod.CartFloatingButton));
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <Menu />
 
             {/* floating buttons */}
+            <CartFloatingButton />
             <GoUpFloatingButton />
             <CategoryFloatingButton />
         </>

@@ -9,10 +9,31 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { DropDown } from "../Core";
 import OffersPopup from "./PopUps/OffersPopup";
 
-const deliver_options = ['delivery', 'pickup'];
+// const deliver_options = ['delivery', 'pickup'];
+const deliver_options = [
+    // {
+    //     label: "Dine In",
+    //     value: 'delivery'
+    // },
+    {
+        label: "Takeway",
+        value: 'delivery'
+    },
+    {
+        label: "Pickup",
+        value: 'pickup'
+    },
+    {
+        label: "Dine In",
+        value: 'dinein'
+    }
+];
 const tip_options = ['No Tip', '2', '5', '10', '20', '30', '40', '50'];
 
-const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { deliveryChange: Function, tipChange: Function, fetchCarts: Function }) => {
+type deliveryChangeProps = (type: string) => Promise<boolean>
+type TipChangeProps = (tip: string) => Promise<void>
+
+const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { deliveryChange: deliveryChangeProps, tipChange: TipChangeProps, fetchCarts: Function }) => {
     const [selected_delivery, setSelected_delivery] = useState(deliver_options[0]);
     const [selected_tip, setSelected_tip] = useState(tip_options[0]);
     const [showOffers, setShowOffers] = useState(false);
@@ -208,15 +229,31 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         Delivery
                     </h5>
 
-                    <DropDown
-                        all_choices={deliver_options}
-                        selected_val={selected_delivery}
+                    {/* <DropDown
+                        all_choices={deliver_options.map((_do: {value: string}) => _do.value)}
+                        selected_val={CartData?.order_type || selected_delivery.value}
                         onChange={(newVal) => {
-                            setSelected_delivery(newVal);
-                            deliveryChange(newVal);
+                            // setSelected_delivery(newVal);
+                            deliveryChange(newVal)
+                            .then(resp => resp && setSelected_delivery(newVal));
                         }}
                         containerClassName='max-sm:max-w-full'
-                    />
+                    /> */}
+                    <select
+                    className="relative outline-none flex max-w-[250px] w-full items-start justify-center bg-primary-red text-white rounded-xl py-2 px-3"
+                    value={CartData?.order_type || selected_delivery.value}
+                    onChange={e => {
+                        let val = e.target.value;
+                        deliveryChange(val)
+                        .then(resp => {
+                            var entry = deliver_options.find(_do => _do.value == val) as any;
+                            resp && setSelected_delivery(entry)
+                        });
+                    }}>
+                        {
+                            deliver_options.map((_do, i) => <option className="bg-primary-red text-white hover:bg-primary-red py-2 px-3" key={i} value={_do.value}>{_do.label}</option>)
+                        }
+                    </select>
                 </div>
 
                 <div className='w-full flex sm:items-center justify-between sm:space-x-4 max-sm:space-y-2 max-sm:flex-col'>

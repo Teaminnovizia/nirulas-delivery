@@ -1,8 +1,10 @@
 "use client"
 
+import { toastOptions } from "@/components/Layout";
+import { toast } from "react-toastify";
 import { UrlObject } from "url";
 import { getCookie, server } from "./axios-config";
-import { ADD_ROUTE_ANALYTICS, ADD_TIP, ADD_TO_CART, ADD_UTM_ANALYTICS, APPLY_COUPON, APPLY_LOYALTY_POINTS, CAPTURE_PAYMENT, CHANGE_DELIVERY_TYPE, CLEAR_CART, FETCH_CART_ITEMS, FETCH_COUPON_DEALS, GET_ADDRESSES, GET_BRANCH_ADDRESS, GET_COMMON, GET_LOCATION_LIST, GET_ONE_ORDER, GET_USER_ADDRESS, GET_USER_BY_MOBILE, HOME_SLIDER, MENU_LIST, MENU_WITH_PRODUCTS, PAYMENT_MODES, PLACE_ORDER, REMOVE_COUPON, REMOVE_LOYALTY_POINTS, SEND_OTP, VERIFY_ORDER_PAYMENT, VERIFY_OTP } from "./constants/routes";
+import { ADD_ROUTE_ANALYTICS, ADD_TIP, ADD_TO_CART, ADD_UTM_ANALYTICS, APPLY_COUPON, APPLY_LOYALTY_POINTS, CAPTURE_PAYMENT, CHANGE_DELIVERY_TYPE, CHANGE_ORDER_STATUS, CLEAR_CART, FAILED_ORDER_LIST, FETCH_CART_ITEMS, FETCH_COUPON_DEALS, GET_ADDRESSES, GET_BRANCH_ADDRESS, GET_COMMON, GET_LOCATION_LIST, GET_ONE_ORDER, GET_USER_ADDRESS, GET_USER_BY_MOBILE, HOME_SLIDER, MENU_LIST, MENU_WITH_PRODUCTS, MISSED_ORDER, MY_ORDERS, ORDER_LIST, ORDER_PAYMENT, PAYMENT_HISTORY, PAYMENT_MODES, PLACE_ORDER, PRODUCT_DETAILS_WITH_CUSTOMIZE, PRODUCT_SEARCH, REMOVE_COUPON, REMOVE_LOYALTY_POINTS, SEND_OTP, USER_LOGIN, VERIFY_ORDER_PAYMENT, VERIFY_OTP } from "./constants/routes";
 
 export const getUrlObjectLink = (link: string): UrlObject => link as unknown as UrlObject;
 
@@ -17,6 +19,7 @@ export const getHomeSliders = async () => {
             throw new Error(data.message);
         }
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -26,6 +29,7 @@ export const getCommon = async (type: string) => {
         var { data } = await server.get(GET_COMMON + "/" + type);
         return data?.result;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -39,6 +43,7 @@ export const paymentModeList = async (query: string) => {
         var { data } = await server.get(url);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -54,6 +59,7 @@ export const getMenuList = async () => {
             throw new Error(data.message);
         }
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -69,6 +75,7 @@ export const getMenuWithProducts = async () => {
             throw new Error(data.message);
         }
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -82,6 +89,7 @@ export const getUserByMobile = async (mobile = "") => {
         var { data } = await server.post(GET_USER_BY_MOBILE, payload);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -100,13 +108,14 @@ export const AddToCart = async (body: any) => {
             throw new Error(data.message);
         }
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
 
 export const fetchCartItems = async (from_cart = false) => {
     try {
-        let payloads = { "mobile": getCookie("mobile"), "token": getCookie("token") } as any;
+        let payloads = { "mobile": getCookie("mobile"), "token": getCookie("token"), from_cart };
         if (from_cart) {
             payloads.from_cart = true;
         }
@@ -119,6 +128,7 @@ export const fetchCartItems = async (from_cart = false) => {
             throw new Error(data.message);
         }
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -134,6 +144,7 @@ export const sentOtpForVerification = async (body: any) => {
             throw new Error(data.message);
         }
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -150,6 +161,7 @@ export const verifyOtp = async (body: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -164,6 +176,7 @@ export const getUserAddress = async () => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -174,6 +187,7 @@ export const getLocationList = async () => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -184,6 +198,7 @@ export const changeDeliveryType = async (type: string) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -194,6 +209,7 @@ export const addTip = async (tip: string) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -203,6 +219,7 @@ export const getCouponDeals = async () => {
         var { data } = await server.get(FETCH_COUPON_DEALS);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -213,6 +230,7 @@ export const applyCouponApi = async (couponData: any) => {
         var { data } = await server.post(APPLY_COUPON, payload);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -223,6 +241,7 @@ export const removeCouponApi = async (cart_id: any) => {
         var { data } = await server.post(REMOVE_COUPON, payload);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -233,6 +252,7 @@ export const clearCartApi = async (cart_id: any) => {
         var { data } = await server.post(CLEAR_CART, payload);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -242,6 +262,7 @@ export const applyLoyaltyPointsApi = async () => {
         var { data } = await server.get(APPLY_LOYALTY_POINTS);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -252,6 +273,7 @@ export const removeLoyaltyPointsApi = async () => {
         var { data } = await server.get(REMOVE_LOYALTY_POINTS);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -267,6 +289,7 @@ export const myAddress = async () => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -280,6 +303,7 @@ export const addAddress = async (payload: any) => {
         var { data } = await server.post(GET_ADDRESSES, payload);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -293,6 +317,7 @@ export const updateAddress = async (payload: any) => {
         var { data } = await server.put(GET_ADDRESSES, payload);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -308,6 +333,7 @@ export const DeleteAddress = async (id: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -320,6 +346,7 @@ export const placeOrder = async (data: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -332,6 +359,7 @@ export const verifyOrderPayment = async (data: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -344,6 +372,7 @@ export const capturePayment = async (data: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -354,12 +383,24 @@ export const getUniqueOrder = async (payload: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
 
 
-
+export const generateRandomString = (length: number) => {
+    let result = "";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+  
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+  
+    return result;
+};
 
 export const saveUserRouteAnalytics = async (order_placed = false) => {
     try {
@@ -379,6 +420,7 @@ export const saveUserRouteAnalytics = async (order_placed = false) => {
         // // console.log(data);
         // return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -389,6 +431,7 @@ export const addUserRouteAnalytics = async (payload: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -410,6 +453,7 @@ export const addUtmeAnalytics = async (payload: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -421,6 +465,131 @@ export const fetchBranchFromAddress = async (_address: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const getProductDetailWithCustomize = async (id: number) => {
+    try {
+        var { data } = await server.get(PRODUCT_DETAILS_WITH_CUSTOMIZE + "/" + id);
+        // console.log(data);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const orderPayment = async (body: any) => {
+    try {
+        let payload = { ...body, "mobile": getCookie("mobile"), "token": getCookie("token") };
+        var { data } = await server.post(ORDER_PAYMENT, payload);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+
+export const orderDataList = async (params: string) => {
+    try {
+        let query = "";
+        if (params) {
+            query = "?" + params;
+        }
+        var { data } = await server.get(ORDER_LIST + query);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const failedOrderDataList = async () => {
+    try {
+        let query = "";
+        if (getCookie("branch")) {
+            query = "?branch=" + getCookie("branch")
+        }
+        var { data } = await server.get(FAILED_ORDER_LIST + query);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const changeOrderStatusApi = async (payload: any) => {
+    try {
+        var { data } = await server.post(CHANGE_ORDER_STATUS, payload);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const missedOrderAdd = async (body: any) => {
+    try {
+        let payload = { ...body, "mobile": getCookie("mobile"), "token": getCookie("token") };
+        var { data } = await server.post(MISSED_ORDER, payload);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const myOrders = async (page = 1, limit = 10, sort_by = "created", sort_direction = "DESC") => {
+    try {
+        if (!getCookie("mobile") || getCookie("otp_verified") !== "yes") {
+            return false;
+        }
+        let query = `?page=${page}&limit=${limit}&sort_by=${sort_by}&sort_direction=${sort_direction}`;
+
+        var { data } = await server.get(MY_ORDERS + query);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const paymentHistory = async (page = 1, limit = 10, payment_method = "COD") => {
+    try {
+        if (!getCookie("mobile") || getCookie("otp_verified") !== "yes") {
+            return false;
+        }
+        let query = `?page=${page}&limit=${limit}&payment_method=${payment_method}`;
+
+        var { data } = await server.get(PAYMENT_HISTORY + query);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+
+export const userLogin = async (body: any) => {
+    try {
+        var { data } = await server.post(USER_LOGIN, body);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const searchProduct = async (text: any) => {
+    try {
+        let query = `?search=${text}&is_site=1`;
+        var { data } = await server.get(PRODUCT_SEARCH + query);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }

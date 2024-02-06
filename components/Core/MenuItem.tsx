@@ -56,19 +56,27 @@ const MenuItem = ({ data, addToCart, ...restProps }: { data: PropsType, addToCar
                                 addToCart(_data)
                             }}
                             onIncrease={() => {
-                                var _data = {...data};
-                                _data.qty = isInCart?.qty + 1;
-                                addToCart(_data)
+                                if(data.is_customizable == 1) {
+                                    restProps.setShowItemDetailWithAddOn(data)
+                                }
+                                else {
+                                    var _data = {...data};
+                                    _data.qty = isInCart?.qty + 1;
+                                    addToCart(_data)
+                                }
                             }}
                         /> :
-                        <Button title="ADD" onClick={() => {
-                            if(data.is_customizable == 1) {
-                                restProps.setShowItemDetailWithAddOn(data)
-                            }
-                            else {
-                                addToCart(data);
-                            }
-                        }} />
+                        <div>
+                            <Button title="ADD" onClick={() => {
+                                if(data.is_customizable == 1) {
+                                    restProps.setShowItemDetailWithAddOn(data)
+                                }
+                                else {
+                                    addToCart(data);
+                                }
+                            }} />
+                            {data.is_customizable == 1 && <p className="text-xs text-center mt-1 text-primary-red">Customize</p>}
+                        </div>
                     }
 
                     
@@ -81,11 +89,13 @@ const MenuItem = ({ data, addToCart, ...restProps }: { data: PropsType, addToCar
                     </h5>
 
                     <div className='flex items-center gap-1'>
-                        <div className='flex items-center justify-center flex-shrink-0 border border-primary-green rounded-sm p-1'>
-                            <span className='w-3 h-3 rounded-full bg-primary-green' />
+                        <div className={`flex items-center justify-center flex-shrink-0 border border-primary-${data.is_non_veg ? "red" : "green"} rounded-sm p-1`}>
+                            <span className={`w-3 h-3 rounded-full bg-primary-${data.is_non_veg ? "red" : "green"}`} />
                         </div>
 
-                        <StarIcon width={28} height={28} />
+                        {
+                            data?.is_bestseller && <StarIcon width={28} height={28} />
+                        }
                     </div>
                 </div>
 
@@ -110,4 +120,6 @@ interface PropsType {
     is_customizable: number
     qty?: number
     remove_item?: boolean
+    is_non_veg: number
+    is_bestseller: number
 }

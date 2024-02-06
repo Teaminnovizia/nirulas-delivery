@@ -15,8 +15,8 @@ const CategoryItem = ({ data, setClose }: { data: { id: string, title: string, t
                 src={BaseUrl + "public" + data.thumbnail}
                 alt={data.title}
                 quality={100}
-                width={100}
-                height={100}
+                width={80}
+                height={80}
                 loading='lazy'
                 className='rounded-full overflow-hidden'
             />

@@ -2,6 +2,7 @@ import AddedItem from "./AddedItem";
 import AddressForm from "./AddressForm";
 import BillDetails from "./BillDetails";
 import BillOptionsAndPromo from "./BillOptionsAndPromo";
+import CartFloatingButton from './CartFloatingButton';
 import CartListItem from "./CartListItem";
 import CategoryFloatingButton from "./CategoryFloatingButton";
 import CategoryItemContainer from "./CategoryItemContainer";
@@ -41,5 +42,7 @@ export {
     SavedAddresses,
     SignUpForm,
     SplashScreen,
-    Weather
+    Weather,
+    CartFloatingButton
 };
+

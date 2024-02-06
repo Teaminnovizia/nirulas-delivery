@@ -1,18 +1,19 @@
 'use client'
 
 import { MenuWithItemPopups } from "@/components/Common";
-import StarIcon from "@/icons/StarIcon";
 import { getMenuWithProducts } from "@/utils/LibFunctions";
 import Image from "next/image";
 import { useEffect, useState } from 'react';
 
 const Menu = () => {
+    const [OriginalData, setOriginalData] = useState<any[]>([]);
     const [MenuProductData, setMenuProductData] = useState<any[]>([]);
 
     useEffect(() => {
         getMenuWithProducts()
         .then(data => {
-            console.log(data);
+            // console.log(data);
+            setOriginalData(data);
             setMenuProductData(data);
         })
         .catch(e => console.log(e));
@@ -43,11 +44,31 @@ const Menu = () => {
                                     type="text"
                                     placeholder='Search a dish or cuisine'
                                     className='outline-none font-normal text-black/75 placeholder:text-black/75 font-rubik w-full'
+                                    onChange={e => {
+                                        let val = e.target.value;
+                                        if(!val) {
+                                            return setMenuProductData(OriginalData);
+                                        }
+                                        // setSearchProduct(val);
+                                        setMenuProductData((prod_data: any[]) => {
+                                            return OriginalData.filter((prod: { items: any[] }) => {
+                                                return prod.items.some((item: { name: string }) => {
+                                                    let name = item.name;
+                                                    if(name.toLowerCase().includes(val)) {
+                                                        return true;
+                                                    }
+                                                    else {
+                                                        return false;
+                                                    }
+                                                })
+                                            })
+                                        })
+                                    }}
                                 />
                             </div>
                         </div>
 
-                        <div className='flex items-center gap-4'>
+                        {/* <div className='flex items-center gap-4'>
                             <button className='flex items-center gap-2 font-medium rounded-lg border border-[#A8A8A8] px-2 py-1'>
                                 <div className='flex items-center justify-center flex-shrink-0 border border-primary-green rounded-sm p-1'>
                                     <span className='w-2 h-2 rounded-full bg-primary-green' />
@@ -66,7 +87,7 @@ const Menu = () => {
                                 <StarIcon width={20} height={20} />
                                 Bestseller
                             </button>
-                        </div>
+                        </div> */}
                     </div>
 
                     <p className='w-full text-left text-primary-grey font-medium font-rubik'>
@@ -74,7 +95,7 @@ const Menu = () => {
                     </p>
                 </div>
 
-                <MenuWithItemPopups MenuProductData={MenuProductData} />
+                <MenuWithItemPopups key={MenuProductData.length} MenuProductData={MenuProductData} />
             </div>
         </section>
     )

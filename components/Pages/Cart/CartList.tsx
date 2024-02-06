@@ -1,9 +1,11 @@
 'use client'
 
 import { cart_atom } from "@/atoms/index";
+import { toastOptions } from "@/components/Layout";
 import { AddToCart, clearCartApi, fetchCartItems } from "@/utils/LibFunctions";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from 'react';
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 
 const CartListItem = dynamic(() => import('@/components/Common').then(mod => mod.CartListItem));
@@ -58,11 +60,13 @@ const CartList = () => {
             if (data.status) {
                 // setShowItemDetailWithAddOnPopup(false);
 
+                toast.success("Added To Cart", toastOptions);
                 // window.$('.customizebox').removeClass('slide');
                 // window.$('.customItem').prop('checked', false);
                 if (data.message === "popup") {
                     // setShowPopup(data.result.response_msg);
-                    alert(data.result.response_msg);
+                    toast.success(data.result.response_msg, toastOptions);
+                    // alert(data.result.response_msg);
                 } else {
                     setProductData(data.result);
                     if (product.increase) {
@@ -100,12 +104,14 @@ const CartList = () => {
                         if (cartObj.result && cartObj.result.offer_id) {
                             if (data.message === "You have an active coupon applied which is applicable for this product. Please remove and apply again") {
                                 // window.createNotification("error", data.message);
-                                alert("error: " + data.message);
+                                toast.error(data.message, toastOptions);
+                                // alert("error: " + data.message);
                             }
                         }
                         if (data.message === "popup") {
                             // setShowPopup(data.result.response_msg);
-                            alert(data.result.response_msg);
+                            toast.success(data.result.response_msg, toastOptions);
+                            // alert(data.result.response_msg);
                         }
                     }
                 }
@@ -117,7 +123,8 @@ const CartList = () => {
                 // }
             } else {
                 // window.createNotification("error", data.message);
-                alert("error: " + data.message);
+                // alert("error: " + data.message);
+                toast.error(data.message, toastOptions);
 
                 // if (window.$(".add-button-" + product.id)) {
                 //     window.$(".add-button-" + product.id).find(".loader-icon").hide();
@@ -142,12 +149,14 @@ const CartList = () => {
                     // window.$(".menuflex span").text("");
                     // window.$(".cartclick h4").text("Cart");
                     await fetchCarts();
-                    alert("success: " + clearCartRes.message);
+                    toast.success(clearCartRes.message, toastOptions);
+                    // alert("success: " + clearCartRes.message);
                 }
             }
 
-        } catch (error) {
-            alert("error: " + error);
+        } catch (error: any) {
+            toast.error(error?.message || error, toastOptions);
+            // alert("error: " + error);
         }
     }
     

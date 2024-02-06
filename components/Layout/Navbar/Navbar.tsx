@@ -5,6 +5,7 @@ import LocationPopup from '@/components/Common/PopUps/LocationPopup';
 import UseLocation from '@/components/Hooks/UseLocation';
 import { getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
+import { deleteCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,6 +37,14 @@ const Navbar = () => {
             else document.body.style.overflow = 'auto';
         }
     }, [show_small_nav])
+
+    function logOut() {
+        deleteCookie("mobile");
+        deleteCookie("isLoggedIn");
+        deleteCookie("branch");
+        deleteCookie("role");
+        deleteCookie("token");
+    }
 
     return (
         <>
@@ -100,9 +109,9 @@ const Navbar = () => {
                             Login
                         </button>
 
-                        <button onClick={() => setShowSignUp(true)} className='font-rubik text-primary-grey'>
+                        {/* <button onClick={() => setShowSignUp(true)} className='font-rubik text-primary-grey'>
                             Sign up
-                        </button>
+                        </button> */}
                     </div>
 
                     <button title='Toggle Nav' onClick={() => setShow_small_nav(true)} className='hidden max-lg:inline-block text-primary-red text-3xl cursor-pointer'>

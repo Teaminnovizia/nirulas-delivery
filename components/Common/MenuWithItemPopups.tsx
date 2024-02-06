@@ -5,7 +5,9 @@ import { MenuItemsContainer } from "@/components/Common";
 import { AddToCart, fetchCartItems } from "@/utils/LibFunctions";
 import { setCookie } from "cookies-next";
 import { useEffect, useState } from 'react';
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
+import { toastOptions } from "../Layout";
 import { ItemDetailPopup, ItemDetailWithAddOnPopup } from "./PopUps";
 
 const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => {
@@ -71,6 +73,7 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
             if (data.status) {
                 setCustomizedData("");
 
+                toast.success("Added To Cart", toastOptions);
                 // setShowModal(false);
                 setShowItemDetailWithAddOnPopup(false);
 
@@ -78,7 +81,7 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                 // window.$('.customItem').prop('checked', false);
                 if (data.message === "popup") {
                     // setShowPopup(data.result.response_msg);
-                    alert(data.result.response_msg);
+                    toast.success(data.result.response_msg, toastOptions as any);
                 } else {
                     if (product.increase) {
                         // var cart = window.$("#animate-cart");
@@ -86,6 +89,7 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                         // if (imgtodrag) {
                         //     window.addToCartAnimation(imgtodrag, cart);
                         // }
+                        // toast.success('Product added to cart!', toastOptions as any);
                     }
 
                     if (data.result) {
@@ -115,12 +119,13 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                         if (cartObj.result && cartObj.result.offer_id) {
                             if (data.message === "You have an active coupon applied which is applicable for this product. Please remove and apply again") {
                                 // window.createNotification("error", data.message);
-                                alert("error: " + data.message);
+                                // alert("error: " + data.message);
+                                toast.error(data.message, toastOptions as any);
                             }
                         }
                         if (data.message === "popup") {
                             // setShowPopup(data.result.response_msg);
-                            alert(data.result.response_msg);
+                            toast.success(data.result.response_msg, toastOptions as any);
                         }
                     }
                 }
@@ -132,7 +137,8 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                 // }
             } else {
                 // window.createNotification("error", data.message);
-                alert("error: " + data.message);
+                // alert("error: " + data.message);
+                toast.error(data.message, toastOptions as any);
 
                 // if (window.$(".add-button-" + product.id)) {
                 //     window.$(".add-button-" + product.id).find(".loader-icon").hide();

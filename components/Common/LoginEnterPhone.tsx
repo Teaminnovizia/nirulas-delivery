@@ -44,7 +44,7 @@ const LoginEnterPhone = ({ phone, setPhone, onSubmit, setClose }: { phone: strin
                 />
             </form>
 
-            <div className='flex items-center space-x-1'>
+            {/* <div className='flex items-center space-x-1'>
                 <p className='font-rubik font-normal'>
                     New to Nirula&apos;s?
                 </p>
@@ -55,7 +55,7 @@ const LoginEnterPhone = ({ phone, setPhone, onSubmit, setClose }: { phone: strin
                 >
                     Create a Account
                 </button>
-            </div>
+            </div> */}
         </div>
     )
 }

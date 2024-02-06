@@ -1,6 +1,7 @@
 "use client"
 
 import { cart_atom, login_popup, user_atom } from "@/atoms/index";
+import { PlaceOrderProps } from "@/types/PlaceOrderProps";
 import { capturePayment, fetchCartItems, getCommon, getLocationList, getUserAddress, paymentModeList, placeOrder, saveUserRouteAnalytics, saveUtmAnalytics, verifyOrderPayment } from "@/utils/LibFunctions";
 import { ConfigData } from "@/utils/constants";
 import { getCookie } from "cookies-next";
@@ -31,10 +32,15 @@ const PlaceOrder = () => {
     const [paymentModeData, setPaymentModeData] = useState([]);
     const [isUserApiAddress, setUserApiAddress] = useState<string>("");
     const [locationData, setLocationData] = useState<any>();
-    const [formValues, setFormValues] = useState<any>({
+    const [formValues, setFormValues] = useState<PlaceOrderProps>({
         gift: 'no',
         delivery: 'now',
-        payment_mode: 'cod'
+        payment_mode: 'cod',
+        order_type: "",
+        source: "DESKTOP_SITE",
+        name: "",
+        instruction: "",
+        location_id: ""
     });
     const [selectedAddress, setSelectedAddress] = useState<any>(null);
 
@@ -137,7 +143,7 @@ const PlaceOrder = () => {
 
     const placeOrderSubmit = async () => {
 
-        let data = formValues;
+        let data = {...formValues};
 
         // setIsLoading(true);
         data.order_type = CartData.order_type;
@@ -295,7 +301,18 @@ const PlaceOrder = () => {
                 <Script type="text/javascript" src="https://checkout.razorpay.com/v1/checkout.js"></Script>
             </Head> */}
             <AddedItems CartData={CartData} />
-            <YourDetails selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} scheduleAvailable={scheduleAvailable} CartData={CartData} onChange={onChange} formValues={formValues} locationData={locationData} />
+            {
+                getCookie("otp_verified") === "yes" && CartData && 
+                <YourDetails
+                    key={showLogin ? 1 : 0}
+                    selectedAddress={selectedAddress}
+                    setSelectedAddress={setSelectedAddress}
+                    scheduleAvailable={scheduleAvailable}
+                    CartData={CartData}
+                    onChange={onChange}
+                    formValues={formValues}
+                    locationData={locationData}
+                />}
             <Instructions onChange={onChange} formValues={formValues} />
             <Summery />
             <PaymentMode onChange={onChange} formValues={formValues} paymentModeData={paymentModeData} />

@@ -10,21 +10,45 @@ import PopupContainer from "./PopupContainer";
 const ItemDetailWithAddOnPopup = ({ showPopup, setShowPopup, productInfo }: CommonProps) => {
     const [selectedBase, setSelectedbase] = useState<any>(null);
     const [baseData, setBaseData] = useState<any>(null);
+    const [CustomizeData, setCustomizedData] = useState<any[]>([]);
 
     useEffect(() => {
         if(productInfo) {
+            // var _cust_data = productInfo.customize_data.find((cd: any) => !cd.is_base);
+            // setCustomizedData(() => _cust_data);
+
             var _bases = productInfo.customize_data.find((cd: any) => cd.is_base);
             if(_bases?.item) {
                 var _selected_base = _bases?.item?.find((bt: any) => bt?.price == productInfo?.price);
-                setSelectedbase(_selected_base);
+                setSelectedbase(() => _selected_base);
             }
             setBaseData(_bases);
         }
+
+        // return () => {
+        //     setCustomizedData([]);
+        //     setBaseData(null);
+        //     setSelectedbase(null);
+        // }
     }, [productInfo])
 
     useEffect(() => {
         if(selectedBase) {
             // after base select logic
+            let veg_topping_id = null as number | null;
+            let non_veg_topping_id = null as number | null;
+            if('veg_topping_id' in selectedBase) {
+                veg_topping_id = selectedBase.veg_topping_id;
+            }
+            if('non_veg_id' in selectedBase) {
+                non_veg_topping_id = selectedBase.non_veg_id;
+            }
+
+            if(veg_topping_id && non_veg_topping_id) {
+                var _cust_data = productInfo.customize_data.filter((cd: any) => !cd.is_base);
+                _cust_data = _cust_data.filter((obj: any) => parseInt(obj.id) === Number(veg_topping_id) || parseInt(obj.id) === Number(non_veg_topping_id))
+                setCustomizedData(_cust_data);
+            }
         }
     }, [selectedBase])
 

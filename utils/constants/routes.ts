@@ -34,6 +34,18 @@ export const VERIFY_ORDER_PAYMENT = "/orders/verifyOrderPayment";  // POST
 export const CAPTURE_PAYMENT = "/orders/capturePayment";  // POST
 export const GET_ONE_ORDER = "/orders/getUniqueOrder";  // POST
 export const GET_BRANCH_ADDRESS = "/getBranchByAddress";  // POST
+export const PRODUCT_DETAILS_WITH_CUSTOMIZE = "/product/getWithCustomize";  // GET param { /:id }
+export const ORDER_PAYMENT = "/orders/orderPayment";  // POST
+export const ORDER_LIST = "/orders-list";  // GET
+export const FAILED_ORDER_LIST = "/orders/failedOrderDataList";  // GET
+export const CHANGE_ORDER_STATUS = "/orders/changeOrderStatus";  // POST
+export const MISSED_ORDER = "/missedOrders/add";  // POST
+export const MY_ORDERS = "/my-orders";  // GET
+export const PAYMENT_HISTORY = "/payment-history";  // GET
+
+export const USER_LOGIN = "/userLogin";  // POST
+export const PRODUCT_SEARCH = "/product-search";  // GET
+
 
 export const ADD_ROUTE_ANALYTICS = "/analytics_route/add";  // POST
 export const ADD_UTM_ANALYTICS = "/utm/add_analytics";  // POST

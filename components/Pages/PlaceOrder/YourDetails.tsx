@@ -2,6 +2,7 @@
 
 import { address_atom } from "@/atoms/index";
 import { Button, Divider, Input, TextArea } from "@/components/Core";
+import { PlaceOrderProps } from "@/types/PlaceOrderProps";
 import { myAddress } from "@/utils/LibFunctions";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ import { useRecoilState } from "recoil";
 
 const AddressUpdatePopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod.AddressUpdatePopup));
 
-const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, CartData, onChange, formValues, locationData }: { selectedAddress: any, setSelectedAddress: any, scheduleAvailable: number, CartData: any, onChange: Function, formValues: any, locationData: any[] }) => {
+const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, CartData, onChange, formValues, locationData }: { selectedAddress: any, setSelectedAddress: any, scheduleAvailable: number, CartData: any, onChange: Function, formValues: PlaceOrderProps, locationData: any[] }) => {
     const [showAddress, setShowAddress] = useState(false);
     const [deliveryType, setDeliveryType] = useState(formValues?.delivery || "now");
     const [UserAddresses, setUserAddresses] = useRecoilState(address_atom);
@@ -30,7 +31,7 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
     }
 
     useEffect(() => {
-       fetchAddresses(); 
+        fetchAddresses();
     }, [])
 
     const dateValidate = (value: any) => {
@@ -51,7 +52,7 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                     <Divider title='your Details' />
 
                     {
-                        CartData.order_type === "delivery" && <div>
+                        CartData?.order_type === "delivery" && <div>
                             {selectedAddress && <TextArea
                                 rows={3}
                                 required
@@ -73,7 +74,7 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                         { 
                             <div className='max-w-xl w-full mx-auto space-y-4'>
                                 {
-                                    CartData.order_type === 'delivery' &&
+                                    CartData?.order_type === 'delivery' &&
                                     <div className='w-full space-y-2'>
                                         <h4 className='font-rubik font-bold text-center'>
                                             SCHEDULE
@@ -94,7 +95,7 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                                 }
 
                                 {
-                                    (deliveryType === 'later' || CartData.order_type === 'pickup') && 
+                                    (deliveryType === 'later' || CartData?.order_type === 'pickup') && 
                                     <div className='w-full grid sm:grid-cols-2 grid-cols-1 gap-4'>
                                         <Input
                                             type='date'

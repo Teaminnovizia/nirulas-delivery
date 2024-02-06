@@ -2,6 +2,7 @@ import Layout from '@/components/Layout';
 import '@/styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+
     return (
         <html lang='en'>
             <Head />
@@ -18,6 +19,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 export default RootLayout;
 
 const Head = () => {
+
     return (
         <head>
             <title>Delivery | Nirulas</title>

@@ -2,7 +2,9 @@
 
 import { cart_atom } from "@/atoms/index";
 import { BillDetails, BillOptionsAndPromo } from "@/components/Common";
+import { toastOptions } from "@/components/Layout";
 import { addTip, changeDeliveryType, fetchCartItems } from "@/utils/LibFunctions";
+import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
 
 const Bill = () => {
@@ -18,11 +20,14 @@ const Bill = () => {
 
     async function deliveryChange(type: string) {
         var res = await changeDeliveryType(type);
-        if (res.status) {
+        if (res?.status) {
             await fetchCarts();
+            return true;
         }
         else {
-            alert("error: " + res.message);
+            // alert("error: " + res.message);
+            toast.error(res.message, toastOptions);
+            return false;
         }
     }
 
@@ -32,7 +37,8 @@ const Bill = () => {
             await fetchCarts();
         }
         else {
-            alert("error: " + res.message);
+            // alert("error: " + res.message);
+            toast.error(res.message, toastOptions);
         }
     }
 

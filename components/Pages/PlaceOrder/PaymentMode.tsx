@@ -1,7 +1,10 @@
 import { PaymentModeItem } from "@/components/Common";
 import { Divider } from "@/components/Core";
+import { PlaceOrderProps } from "@/types/PlaceOrderProps";
 
-const PaymentMode = ({ onChange, formValues, paymentModeData }: { onChange: Function, formValues: any, paymentModeData: any[] }) => {
+type onChangeProps = (field: string, value: any) => void;
+
+const PaymentMode = ({ onChange, formValues, paymentModeData }: { onChange: onChangeProps, formValues: PlaceOrderProps, paymentModeData: any[] }) => {
 
     function onClick(val: string) {
         onChange('payment_mode', val);
