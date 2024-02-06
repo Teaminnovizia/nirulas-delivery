@@ -3,7 +3,7 @@
 import { address_atom } from "@/atoms/index";
 import { Button, Divider, Input, TextArea } from "@/components/Core";
 import { PlaceOrderProps } from "@/types/PlaceOrderProps";
-import { myAddress } from "@/utils/LibFunctions";
+import { getUserAddress } from "@/utils/LibFunctions";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -16,18 +16,39 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
     const [UserAddresses, setUserAddresses] = useRecoilState(address_atom);
     // const [selectedAddress, setSelectedAddress] = useState<any>(null);
 
+    // async function fetchAddresses() {
+    //     let response = await myAddress();
+    //     // console.log({ response })
+    //     if(response?.status) {
+    //         let addresses = response.result.data;
+    //         setUserAddresses(addresses);
+    //         var addr = addresses.find((ad: any) => ad.is_default);
+    //         if(CartData?.order_type != "pickup") {
+    //             setSelectedAddress(addr);
+    //             onChange('selected_address', addr?.id);
+    //         }
+    //     }
+    // }
+
     async function fetchAddresses() {
-        let response = await myAddress();
-        // console.log({ response })
-        if(response?.status) {
-            let addresses = response.result.data;
-            setUserAddresses(addresses);
-            var addr = addresses.find((ad: any) => ad.is_default);
+        let userAddressRes = await getUserAddress();
+        if (userAddressRes && userAddressRes.status) {
+            setUserAddresses(userAddressRes.result);
+            var addr = userAddressRes.result.find((ad: any) => ad.is_default);
             if(CartData?.order_type != "pickup") {
                 setSelectedAddress(addr);
                 onChange('selected_address', addr?.id);
             }
         }
+        // if(response?.status) {
+        //     let addresses = response.result.data;
+        //     setUserAddresses(addresses);
+        //     var addr = addresses.find((ad: any) => ad.is_default);
+        //     if(CartData?.order_type != "pickup") {
+        //         setSelectedAddress(addr);
+        //         onChange('selected_address', addr?.id);
+        //     }
+        // }
     }
 
     useEffect(() => {

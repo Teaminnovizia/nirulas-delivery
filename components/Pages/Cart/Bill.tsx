@@ -26,7 +26,7 @@ const Bill = () => {
         }
         else {
             // alert("error: " + res.message);
-            toast.error(res.message, toastOptions);
+            toast.error(res?.message || "Something went wrong!", toastOptions);
             return false;
         }
     }
