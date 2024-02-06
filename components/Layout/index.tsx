@@ -5,9 +5,9 @@ import Navbar from '@/components/Layout/Navbar/Navbar';
 import { generateRandomString, saveUserRouteAnalytics, saveUtmAnalytics } from '@/utils/LibFunctions';
 import moment from 'moment';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useMemo } from 'react';
-import ReactPixel from 'react-facebook-pixel';
-import ReactGa from 'react-ga';
+import { useEffect } from 'react';
+// import ReactPixel from 'react-facebook-pixel';
+// import ReactGa from 'react-ga';
 import { ToastContainer, ToastOptions } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { RecoilRoot } from 'recoil';
@@ -16,23 +16,23 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
     const search = useSearchParams();
 
-    useMemo(() => {
-        console.log("layout called");
+    // useMemo(() => {
+    //     console.log("layout called");
 
-        ReactGa.initialize("UA-185979255-1"); // react-ga
-        ReactGa.pageview(pathname + "?" + search.toString());
+    //     ReactGa.initialize("UA-185979255-1"); // react-ga
+    //     ReactGa.pageview(pathname + "?" + search.toString());
 
-        ReactGa.initialize("AW-10783628317");
-        ReactGa.pageview(pathname + "?" + search.toString());
+    //     ReactGa.initialize("AW-10783628317");
+    //     ReactGa.pageview(pathname + "?" + search.toString());
 
-        const options = {
-            autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
-            debug: false, // enable logs
-        };
-        ReactPixel.init('502226218020773', options as any); // react-facebook-pixel
+    //     const options = {
+    //         autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
+    //         debug: false, // enable logs
+    //     };
+    //     ReactPixel.init('502226218020773', options as any); // react-facebook-pixel
 
-        ReactPixel.pageView(); // For tracking page view
-    }, [])
+    //     ReactPixel.pageView(); // For tracking page view
+    // }, [])
     
     return (
         <RecoilRoot>
