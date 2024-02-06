@@ -5,8 +5,10 @@ import { applyCouponApi, applyLoyaltyPointsApi, getCouponDeals, getUserByMobile,
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CiDiscount1 } from 'react-icons/ci';
+import { toast } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { DropDown } from "../Core";
+import { toastOptions } from "../Layout";
 import OffersPopup from "./PopUps/OffersPopup";
 
 // const deliver_options = ['delivery', 'pickup'];
@@ -43,7 +45,7 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
 
     async function fetchDealsFunction() {
         const fetchDeals = await getCouponDeals();
-        if (fetchDeals.status) {
+        if (fetchDeals && fetchDeals.status) {
             if (fetchDeals.result) {
                 setDealsData(fetchDeals.result);
             }
@@ -65,7 +67,7 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                 }
                 try {
                     const applyCouponRes = await applyCouponApi(couponData);
-                    if (applyCouponRes.status) {
+                    if (applyCouponRes && applyCouponRes.status) {
                         const getCartData = await fetchCarts();
                         // if (getCartData) {
                         //     if (getCartData) {
@@ -82,15 +84,18 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         //     // setProductData(getCartData);
                         // }
                         setShowOffers(false);
-                        alert("success: " + applyCouponRes.message);
+                        toast.success(applyCouponRes.message, toastOptions);
+                        // alert("success: " + applyCouponRes.message);
                     } else {
-                        alert("error: " + applyCouponRes.message);
+                        // alert("error: " + applyCouponRes.message);
                     }
                 } catch (error: any) {
-                    alert("error: " + error?.message);
+                    toast.error(error?.message || "Something went wrong!", toastOptions);
+                    // alert("error: " + error?.message);
                 }
             } else {
-                alert("error: " + "Please select a coupon");
+                toast.error("Please select a coupon", toastOptions);
+                // alert("error: " + "Please select a coupon");
             }
             // setIsLoading(false);
         } catch (error) {
@@ -103,17 +108,20 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         }
                         try {
                             const applyCouponRes = await applyCouponApi(couponData);
-                            if (applyCouponRes.status) {
+                            if (applyCouponRes && applyCouponRes.status) {
                                 await fetchCarts();
-                                alert("success: " + applyCouponRes.message);
+                                toast.success(applyCouponRes.message, toastOptions);
+                                // alert("success: " + applyCouponRes.message);
                                 setShowOffers(false);
                             }
                         } catch (error: any) {
-                            alert("error: " + error?.message);
+                            toast.error(error?.message, toastOptions);
+                            // alert("error: " + error?.message);
                         }
                 }
                 else {
-                    alert('error: ' + "Please select a coupon")
+                    toast.error("Please select a coupon", toastOptions);
+                    // alert('error: ' + "Please select a coupon")
                 }
             }
             
@@ -124,7 +132,7 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
         // setIsLoading(true);
         try {
             const removeCouponRes = await removeCouponApi({ cart_id: cart_id });
-            if (removeCouponRes.status) {
+            if (removeCouponRes && removeCouponRes.status) {
                 await fetchCarts();
                 // const getCartData = await fetchCarts();
                 // if (getCartData.data) {
@@ -141,10 +149,12 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                 //     }
                 //     setProductData(getCartData.data.result);
                 // }
-                alert("success: " + removeCouponRes.message);
+                toast.success(removeCouponRes.message, toastOptions);
+                // alert("success: " + removeCouponRes.message);
             }
         } catch (error: any) {
-            alert("error: " + error?.message);
+            toast.error(error?.message || "Something went wrong!", toastOptions);
+            // alert("error: " + error?.message);
             // window.createNotification("error", error);
         }
         // setIsLoading(false);
@@ -153,7 +163,7 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
     const applyLoyaltyPoints = async () => {
         try {
             const res = await applyLoyaltyPointsApi();
-            if (res.status) {
+            if (res && res.status) {
                 // const getCartData = await getCartItem();
                 // if (getCartData.data) {
                 //     setProductData(getCartData.data.result);
@@ -165,19 +175,21 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         setUserData(fetchUser.result);
                     }
                 }
-                alert("success: " + res.message);
+                toast.success(res.message, toastOptions);
+                // alert("success: " + res.message);
             } else {
-                alert("error: " + res.message);
+                // alert("error: " + res?.message);
             }
         } catch (error: any) {
-            alert("error: " + error?.message);
+            toast.error(error?.message || "Something went wrong!", toastOptions);
+            // alert("error: " + error?.message);
         }
     }
 
     const removeLoyaltyPoints = async () => {
         try {
             const res = await removeLoyaltyPointsApi();
-            if (res.status) {
+            if (res && res.status) {
                 // const getCartData = await getCartItem();
                 // if (getCartData.data) {
                 //     setProductData(getCartData.data.result);
@@ -189,41 +201,21 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         setUserData(fetchUser.result);
                     }
                 }
-                alert("success: " + res.message);
+                toast.success(res.message, toastOptions);
+                // alert("success: " + res.message);
             } else {
-                alert("error: " + res.message);
+                // alert("error: " + res.message);
             }
         } catch (error: any) {
-            alert("error: " + error?.message);
+            toast.error(error?.message || "Something went wrong!", toastOptions);
+            // alert("error: " + error?.message);
         }
     }
 
     return (
         <>
             <div className='w-full sm:px-4 space-y-3'>
-                {userData && <div className="cartofferflex">
-                    <h5>Loyalty Points</h5>
-                    {
-                        Number(CartData?.applied_coins)
-                            ?
-                            <>
-                                <div className="flex items-center justify-around py-2">
-                                    <p>Available Points: <strong className="black">₹ {userData?.coins || 0}</strong></p>
-                                </div>
-                                <div className="flex items-center justify-around shadow rounded">
-                                    <p>Applied Points: <strong className="black">₹ {CartData.applied_coins}</strong></p>
-                                    <Link href={"/"} onClick={(e) => { removeLoyaltyPoints(); e.preventDefault() }} className="removedeals">Remove</Link>
-                                    {/* <i className="fa fa-spinner fa-spin red hide"></i> */}
-                                </div>
-                            </>
-                            :
-                            <div className="flex items-center justify-around shadow rounded">
-                                <p>Available Points: <strong className="black">₹ {userData?.coins || 0}</strong></p>
-                                <Link href={"/"} className="viewdealss" onClick={(e) => { applyLoyaltyPoints(); e.preventDefault() }}>Apply Points</Link>
-                                {/* <i className="fa fa-spinner fa-spin red hide"></i> */}
-                            </div>
-                    }
-                </div>}
+                
                 <div className='w-full flex sm:items-center justify-between sm:space-x-4 max-sm:space-y-2 max-sm:flex-col'>
                     <h5 className='font-rubik font-bold'>
                         Delivery
@@ -295,6 +287,30 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         </div>
                     }
                 </div>
+
+                {userData && <div className="cartofferflex flex items-center justify-between">
+                    <h5>Loyalty Points</h5>
+                    {
+                        Number(CartData?.applied_coins)
+                        ?
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-around py-2">
+                                <p>Available Points: <strong className="black">₹ {userData?.coins || 0}</strong></p>
+                            </div>
+                            <div className="flex items-center justify-around rounded gap-3">
+                                <p>Applied Points: <strong className="black">₹ {CartData.applied_coins}</strong></p>
+                                <Link href={"/"} onClick={(e) => { removeLoyaltyPoints(); e.preventDefault() }} className="removedeals shadow rounded p-1">Remove</Link>
+                                {/* <i className="fa fa-spinner fa-spin red hide"></i> */}
+                            </div>
+                        </div>
+                        :
+                        <div className="flex items-center justify-around rounded gap-3">
+                            <p>Available Points: <strong className="black">₹ {userData?.coins || 0}</strong></p>
+                            <Link href={"/"} className="viewdealss shadow rounded p-1" onClick={(e) => { applyLoyaltyPoints(); e.preventDefault() }}>Apply Points</Link>
+                            {/* <i className="fa fa-spinner fa-spin red hide"></i> */}
+                        </div>
+                    }
+                </div>}
             </div>
 
             {showOffers && (

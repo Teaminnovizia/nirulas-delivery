@@ -39,8 +39,9 @@ const CartReview = () => {
         <>
             <CartList />
             <Divider />
-            <Bill />
             <Recommended />
+            <Divider />
+            <Bill />
         </>
     )
 }

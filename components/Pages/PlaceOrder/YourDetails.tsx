@@ -40,15 +40,6 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                 onChange('selected_address', addr?.id);
             }
         }
-        // if(response?.status) {
-        //     let addresses = response.result.data;
-        //     setUserAddresses(addresses);
-        //     var addr = addresses.find((ad: any) => ad.is_default);
-        //     if(CartData?.order_type != "pickup") {
-        //         setSelectedAddress(addr);
-        //         onChange('selected_address', addr?.id);
-        //     }
-        // }
     }
 
     useEffect(() => {
