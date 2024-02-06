@@ -1,7 +1,8 @@
 export interface PlaceOrderProps {
     name: string
+    contact: string
     delivery: string
-    gift: string
+    gift: "yes" | "no"
     instruction: string
     payment_mode: string
     location_id?: string

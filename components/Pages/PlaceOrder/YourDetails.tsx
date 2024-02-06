@@ -10,7 +10,9 @@ import { useRecoilState } from "recoil";
 
 const AddressUpdatePopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod.AddressUpdatePopup));
 
-const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, CartData, onChange, formValues, locationData }: { selectedAddress: any, setSelectedAddress: any, scheduleAvailable: number, CartData: any, onChange: Function, formValues: PlaceOrderProps, locationData: any[] }) => {
+type onChangeProps = (field: string, value: any) => void;
+
+const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, CartData, onChange, formValues, locationData }: { selectedAddress: any, setSelectedAddress: any, scheduleAvailable: number, CartData: any, onChange: onChangeProps, formValues: PlaceOrderProps, locationData: any[] }) => {
     const [showAddress, setShowAddress] = useState(false);
     const [deliveryType, setDeliveryType] = useState(formValues?.delivery || "now");
     const [UserAddresses, setUserAddresses] = useRecoilState(address_atom);
@@ -64,12 +66,30 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                     <Divider title='your Details' />
 
                     {
-                        CartData?.order_type === "delivery" && <div>
+                        CartData?.order_type === "delivery" && <>
+                        <div className='max-w-xl w-full mx-auto space-y-4'>
+                            <Input
+                                type='text'
+                                placeholder='Name'
+                                required
+                                value={formValues?.name}
+                                onChange={e => onChange('name', e.target.value)}
+                            />
+
+                            <Input
+                                type='number'
+                                placeholder='Contact no.'
+                                required
+                                onChange={e => onChange('contact', e.target.value)}
+                                value={formValues?.contact}
+                            />
+                        </div>
+                        <div className="grid items-center gap-3">
                             {selectedAddress && <TextArea
                                 rows={3}
                                 required
                                 placeholder='Address'
-                                className='resize-none'
+                                className='max-w-xl w-full mx-auto space-y-4'
                                 value={`${selectedAddress?.name}, ${selectedAddress?.address_1}, ${selectedAddress?.address_2}, ${selectedAddress?.landmark}, ${selectedAddress?.city}, ${selectedAddress?.state}, ${selectedAddress?.pincode}`}
                             />}
                             <Button
@@ -78,6 +98,7 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                                 onClick={() => {setShowAddress(true)}}
                             />
                         </div>
+                        </>
                     }
 
                     {
@@ -171,12 +192,13 @@ const YourDetails = ({ selectedAddress, setSelectedAddress, scheduleAvailable, C
                                             onChange={e => onChange('name', e.target.value)}
                                         />
 
-                                        {/* <Input
+                                        <Input
                                             type='number'
                                             placeholder='Contact no.'
                                             required
-                                            // value={selectedAddress?.name}
-                                        /> */}
+                                            value={formValues?.contact}
+                                            onChange={e => onChange('contact', e.target.value)}
+                                        />
                                     </div>
                                 </>
                                 :

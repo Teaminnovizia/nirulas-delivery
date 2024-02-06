@@ -1,6 +1,6 @@
 import { Divider } from "@/components/Core";
 
-const Summery = () => {
+const Summery = ({ CartData }: { CartData: any }) => {
     return (
         <section className='w-full sm:px-8 px-3'>
             <div className='w-full space-y-6 py-8 max-w-6xl mx-auto'>
@@ -13,7 +13,7 @@ const Summery = () => {
                         </h5>
 
                         <p className='font-rubik text-xl font-semibold'>
-                            ₹477.8
+                            ₹{CartData?.subtotal}
                         </p>
                     </div>
 
@@ -24,7 +24,7 @@ const Summery = () => {
                             </p>
 
                             <p className='font-rubik text-base'>
-                                ₹44.2
+                                ₹{CartData?.convenience_fee}
                             </p>
                         </div>
 
@@ -34,7 +34,7 @@ const Summery = () => {
                             </p>
 
                             <p className='font-rubik text-base'>
-                                ₹50
+                                ₹{CartData?.delivery_charge}
                             </p>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ const Summery = () => {
                         </h5>
 
                         <p className='font-rubik text-xl font-semibold'>
-                            ₹572
+                            ₹{CartData?.grand_total}
                         </p>
                     </div>
                 </div>

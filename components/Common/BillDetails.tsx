@@ -163,7 +163,7 @@ const BillDetails = ({ CartData }: { CartData: any }) => {
             {
                 Number(CartData.tip)
                     ?
-                    <div className='flex items-center w-full justify-between space-x-3'>
+                    <div className='flex items-center w-full justify-between space-x-3 w-full sm:px-4'>
                         <p className='font-rubik text-lg'>
                             Tip
                         </p>
@@ -189,7 +189,7 @@ const BillDetails = ({ CartData }: { CartData: any }) => {
             {
                 Number(savedAmount) > 10
                     ?
-                    <div className="w-fit float-right">
+                    <div className="w-fit float-right my-2">
                         <div className="bg-green-700 text-white"> You are saving <strong>₹ {savedAmount}</strong> on this order. </div>
                     </div>
                     :

@@ -40,7 +40,8 @@ const PlaceOrder = () => {
         source: "DESKTOP_SITE",
         name: "",
         instruction: "",
-        location_id: ""
+        location_id: "",
+        contact: ""
     });
     const [selectedAddress, setSelectedAddress] = useState<any>(null);
 
@@ -314,7 +315,7 @@ const PlaceOrder = () => {
                     locationData={locationData}
                 />}
             <Instructions onChange={onChange} formValues={formValues} />
-            <Summery />
+            <Summery CartData={CartData} />
             <PaymentMode onChange={onChange} formValues={formValues} paymentModeData={paymentModeData} />
             <Cancellation placeOrderSubmit={placeOrderSubmit} />
         </>
