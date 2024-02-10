@@ -49,7 +49,7 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
     }, []);
     
 
-    function addToCart (product: any) {
+    function addToCart (product: any, done?: (error?: string) => void) {
         let apiProduct: any = {
             product_id: product.id,
             qty: product.qty || 1,
@@ -76,6 +76,9 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                 toast.success("Added To Cart", toastOptions);
                 // setShowModal(false);
                 setShowItemDetailWithAddOnPopup(false);
+                if(typeof(done) == "function") {
+                    done();
+                }
 
                 // window.$('.customizebox').removeClass('slide');
                 // window.$('.customItem').prop('checked', false);
@@ -178,6 +181,7 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                     productInfo={productInfo}
                     showPopup={showItemDetailWithAddOnPopup}
                     setShowPopup={setShowItemDetailWithAddOnPopup}
+                    addToCart={addToCart}
                 />
             )}
         </>

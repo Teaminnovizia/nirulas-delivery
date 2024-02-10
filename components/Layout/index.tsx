@@ -36,6 +36,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     
     return (
         <RecoilRoot>
+            {/* <PropagateLoader className='z-100 mx-auto sticky' loading={true} size={50} color="#36d7b7" style={{ zIndex: 10000 }} /> */}
             <AnalyticsComponent />
             <SplashScreen />
 
@@ -51,7 +52,7 @@ export default Layout;
 
 export const toastOptions: ToastOptions = {
     position: "top-right",
-    autoClose: 8000,
+    autoClose: 4000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",

@@ -20,7 +20,7 @@ const Bill = () => {
 
     async function deliveryChange(type: string) {
         var res = await changeDeliveryType(type);
-        if (res?.status) {
+        if (res && res?.status) {
             await fetchCarts();
             return true;
         }
@@ -33,12 +33,14 @@ const Bill = () => {
 
     async function tipChange(tip: string) {
         var res = await addTip(tip);
-        if (res.status) {
+        if (res && res.status) {
             await fetchCarts();
+            return true;
         }
         else {
+            return false;
             // alert("error: " + res.message);
-            toast.error(res.message, toastOptions);
+            // toast.error(res?.message, toastOptions);
         }
     }
 

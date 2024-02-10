@@ -2,8 +2,10 @@
 
 import { cart_atom } from "@/atoms/index";
 import { toastOptions } from "@/components/Layout";
+import { CartItemProps } from "@/types/CartTypes";
 import { AddToCart, clearCartApi, fetchCartItems } from "@/utils/LibFunctions";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
@@ -16,11 +18,13 @@ const CartList = () => {
     const [customizedData, setCustomizedData] = useState<any>(null);
     const [showModal, setShowModal] = useState(false);
     const [uniqueProduct, setUniqueProduct] = useState("");
+    const router = useRouter();
 
     async function fetchCarts() {
         var cartObj = await fetchCartItems(); // cartObj
         if (cartObj.status) {
             setCartData(cartObj.result);
+            // var ids = cartObj.result.carts_items.filter((ci: any) => ci.is_customized).map((ci: any) => ci.product_id) as number[];
         }
     }
 
@@ -28,7 +32,7 @@ const CartList = () => {
         fetchCarts();
     }, []);
 
-    function addToCart (product: any) {
+    function addToCart (product: any, done?: (error?: any) => void) {
         setCustomizedData("");
         setShowModal(false);
         setUniqueProduct("");
@@ -61,6 +65,9 @@ const CartList = () => {
                 // setShowItemDetailWithAddOnPopup(false);
 
                 toast.success("Added To Cart", toastOptions);
+                if(typeof(done) === "function") {
+                    done();
+                }
                 // window.$('.customizebox').removeClass('slide');
                 // window.$('.customItem').prop('checked', false);
                 if (data.message === "popup") {
@@ -150,6 +157,7 @@ const CartList = () => {
                     // window.$(".cartclick h4").text("Cart");
                     await fetchCarts();
                     toast.success(clearCartRes.message, toastOptions);
+                    router.back();
                     // alert("success: " + clearCartRes.message);
                 }
             }
@@ -175,8 +183,8 @@ const CartList = () => {
 
                 <div className='w-full space-y-4 sm:px-4'>
                     {
-                        Array.isArray(CartData?.carts_items) && CartData.carts_items.map((ci, i) => {
-                            return <CartListItem key={i} data={ci} addToCart={addToCart} />
+                        Array.isArray(CartData?.carts_items) && CartData.carts_items.map((ci: CartItemProps) => {
+                            return <CartListItem key={ci.id} data={ci} addToCart={addToCart} />
                         })
                     }
                     {/* <CartListItem />

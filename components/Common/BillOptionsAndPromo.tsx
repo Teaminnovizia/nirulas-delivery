@@ -1,7 +1,9 @@
 'use client'
 
 import { cart_atom, user_atom } from "@/atoms/index";
+import { DealProps } from "@/types/DealTypes";
 import { applyCouponApi, applyLoyaltyPointsApi, getCouponDeals, getUserByMobile, removeCouponApi, removeLoyaltyPointsApi } from "@/utils/LibFunctions";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CiDiscount1 } from 'react-icons/ci';
@@ -33,13 +35,13 @@ const deliver_options = [
 const tip_options = ['No Tip', '2', '5', '10', '20', '30', '40', '50'];
 
 type deliveryChangeProps = (type: string) => Promise<boolean>
-type TipChangeProps = (tip: string) => Promise<void>
+type TipChangeProps = (tip: string) => Promise<boolean | void>
 
 const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { deliveryChange: deliveryChangeProps, tipChange: TipChangeProps, fetchCarts: Function }) => {
     const [selected_delivery, setSelected_delivery] = useState(deliver_options[0]);
     const [selected_tip, setSelected_tip] = useState(tip_options[0]);
     const [showOffers, setShowOffers] = useState(false);
-    const [dealsData, setDealsData] = useState([]);
+    const [dealsData, setDealsData] = useState<DealProps[]>([]);
     const CartData = useRecoilValue(cart_atom);
     const [userData, setUserData] = useRecoilState(user_atom);
 
@@ -56,7 +58,7 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
         fetchDealsFunction();
     }, []);
 
-    const applyCoupon = async (coupon: any) => {
+    const applyCoupon = async (coupon: DealProps) => {
         try {
             setShowOffers(!showOffers)
             // setIsLoading(true);
@@ -87,6 +89,7 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         toast.success(applyCouponRes.message, toastOptions);
                         // alert("success: " + applyCouponRes.message);
                     } else {
+                        toast.error(applyCouponRes?.message || "Something went wrong!", toastOptions);
                         // alert("error: " + applyCouponRes.message);
                     }
                 } catch (error: any) {
@@ -257,8 +260,10 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                         all_choices={tip_options}
                         selected_val={selected_tip}
                         onChange={(newVal) => {
-                            setSelected_tip(newVal);
-                            tipChange(newVal);
+                            tipChange(newVal)
+                            .then(resp => {
+                                resp && setSelected_tip(newVal);
+                            })
                         }}
                         containerClassName='max-sm:max-w-full'
                     />
@@ -268,8 +273,8 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
                     {
                         CartData?.offer_id ?
                         <div className="flex md:w-1/2 shadow justify-around gap-3 py-2 rounded mx-auto rounded">
-                            <div className="coupon-name">
-                                <img src="https://api2.nirulas.com/nirulas-api/public/assets/images/promo_valid.svg" alt="OfferIcon" />
+                            <div className="coupon-name flex items-center gap-2">
+                                <Image src="https://api2.nirulas.com/nirulas-api/public/assets/images/promo_valid.svg" alt="OfferIcon" width={20} height={20} />
                                 <span>{dealsData.filter((obj: any) => Number(obj.id) === Number(CartData?.offer_id)).map((x: any) => x.code)}</span>
                             </div>
                             <div className="right">
@@ -315,8 +320,8 @@ const BillOptionsAndPromo = ({ deliveryChange, tipChange, fetchCarts }: { delive
 
             {showOffers && (
                 <OffersPopup
-                    dealsData={dealsData as any[]}
-                    applyCoupon={(deal: any) => {applyCoupon(deal)}}
+                    dealsData={dealsData}
+                    applyCoupon={(deal: DealProps) => {applyCoupon(deal)}}
                     isFromCart={true}
                     showPopup={showOffers}
                     setShowPopup={setShowOffers}

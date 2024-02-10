@@ -1,11 +1,14 @@
 import { cart_atom } from "@/atoms/index";
+import { DealProps } from "@/types/DealTypes";
 import { CommonProps } from "@/types/PopUpsTypes";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import OfferListItem from "../OfferListItem";
 import PopupContainer from "./PopupContainer";
 
-const OffersPopup = ({ dealsData, applyCoupon, isFromCart, ...restProps }: { dealsData: any[], applyCoupon: Function, isFromCart: boolean } & CommonProps) => {
+type ApplyCouponTypes = (deal: DealProps) => void
+
+const OffersPopup = ({ dealsData, applyCoupon, isFromCart, ...restProps }: { dealsData: DealProps[], applyCoupon: ApplyCouponTypes, isFromCart: boolean } & CommonProps) => {
     const { showPopup, setShowPopup } = restProps;
     const [couponApplied, setCouponApplied] = useState(false);
     const CartData = useRecoilValue(cart_atom);

@@ -1,4 +1,5 @@
 import { Weather } from "@/components/Common";
+import GoogleMapComponent from "@/components/Common/GoogleMapComponent";
 import Image from "next/image";
 
 const ThankYou = () => {
@@ -33,6 +34,10 @@ const ThankYou = () => {
 
                         <Weather />
                     </div>
+                </div>
+
+                <div>
+                    <GoogleMapComponent />
                 </div>
 
                 <Image

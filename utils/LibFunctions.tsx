@@ -205,6 +205,10 @@ export const changeDeliveryType = async (type: string) => {
 
 export const addTip = async (tip: string) => {
     try {
+        if(!getCookie("token")) {
+            toast.error("Something went wrong!", toastOptions);
+            return false;
+        }
         var { data } = await server.get(ADD_TIP + "/" + tip);
         // console.log(data);
         return data;
@@ -402,6 +406,17 @@ export const generateRandomString = (length: number) => {
     return result;
 };
 
+export function removeFieldFromObject<T extends Record<string, any>, K extends keyof T>(
+  obj: T,
+  fieldName: K
+): T {
+  // Use destructuring to create a new object and omit the specified field
+  const { [fieldName]: _, ...rest } = obj;
+
+  // Cast the return type to maintain strict type safety
+  return rest as T;
+}
+
 export const saveUserRouteAnalytics = async (order_placed = false) => {
     try {
         const storedPath = localStorage.getItem("track_session");
@@ -420,18 +435,21 @@ export const saveUserRouteAnalytics = async (order_placed = false) => {
         // // console.log(data);
         // return data;
     } catch (error: any) {
-        toast.error("Something went wrong!", toastOptions);
+        // toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
 
 export const addUserRouteAnalytics = async (payload: any) => {
     try {
+        if(!getCookie("token")) {
+            return;
+        }
         var { data } = await server.post(ADD_ROUTE_ANALYTICS, payload);
         // console.log(data);
         return data;
     } catch (error: any) {
-        toast.error("Something went wrong!", toastOptions);
+        // toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }
@@ -453,7 +471,7 @@ export const addUtmeAnalytics = async (payload: any) => {
         // console.log(data);
         return data;
     } catch (error: any) {
-        toast.error("Something went wrong!", toastOptions);
+        // toast.error("Something went wrong!", toastOptions);
         console.log('Error', error.message);
     }
 }

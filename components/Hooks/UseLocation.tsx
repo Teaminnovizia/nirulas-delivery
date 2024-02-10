@@ -46,7 +46,8 @@ const UseLocation = () => {
         try {
             const { data } = await axios.get(location_using_coords + `lat=${coords.latitude}&lon=${coords.longitude}&apiKey=${process.env?.NEXT_PUBLIC_GEOAPIFY_API_KEY}`)
 
-            if (data?.features?.length) setLocation(data?.features?.[0]?.properties?.formatted);
+            if (data?.features?.length) setLocation(data?.features?.[0]?.properties?.postcode);
+            // if (data?.features?.length) setLocation(data?.features?.[0]?.properties?.formatted);
         }
         catch (err) {
             console.log(err);

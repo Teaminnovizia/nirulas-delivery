@@ -1,8 +1,11 @@
 import { cart_atom } from "@/atoms/index";
+import { DealProps } from "@/types/DealTypes";
 import { useRecoilValue } from "recoil";
 import { Button } from "../Core";
 
-const OfferListItem = ({ deal, couponApplied, applyCoupon }: { deal: any, couponApplied: boolean, applyCoupon: Function }) => {
+type ApplyCouponTypes = (deal: DealProps) => void
+
+const OfferListItem = ({ deal, couponApplied, applyCoupon }: { deal: DealProps, couponApplied: boolean, applyCoupon: ApplyCouponTypes }) => {
     const CartData = useRecoilValue(cart_atom);
 
     return (

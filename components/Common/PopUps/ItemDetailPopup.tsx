@@ -1,11 +1,12 @@
 import { Button } from "@/components/Core";
 import { CommonProps } from "@/types/PopUpsTypes";
+import { ProductProps } from "@/types/ProductTypes";
 import { BaseUrl } from "@/utils/constants";
 import Image from "next/image";
 import { BsArrowLeft } from "react-icons/bs";
 import PopupContainer from "./PopupContainer";
 
-const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo }: CommonProps) => {
+const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo }: { productInfo: ProductProps } & CommonProps) => {
     return (
         <PopupContainer
             maxWidth='520px'

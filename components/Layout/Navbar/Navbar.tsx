@@ -3,9 +3,9 @@
 import { cart_atom, location_atom, login_popup, signup_popup } from '@/atoms/index';
 import LocationPopup from '@/components/Common/PopUps/LocationPopup';
 import UseLocation from '@/components/Hooks/UseLocation';
-import { getUrlObjectLink } from '@/utils/LibFunctions';
+import { fetchBranchFromAddress, getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,7 +14,9 @@ import { useEffect, useState } from 'react';
 import { BsCaretLeftFill } from 'react-icons/bs';
 import { MdLocationOn } from 'react-icons/md';
 import { TbMenu2 } from 'react-icons/tb';
+import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { toastOptions } from '..';
 
 const SmallNav = dynamic(() => import('./SmallNav'));
 const LoginPopup = dynamic(() => import('@/components/Common/PopUps').then(mod => mod?.LoginPopup));
@@ -22,7 +24,7 @@ const SignUpPopup = dynamic(() => import('@/components/Common/PopUps').then(mod 
 
 const Navbar = () => {
     const location = UseLocation();
-    const address = useRecoilValue(location_atom);
+    const [address, setAddress] = useRecoilState(location_atom);
     const CartData = useRecoilValue(cart_atom);
     const pathname = usePathname();
     const [show_small_nav, setShow_small_nav] = useState(false);
@@ -37,6 +39,33 @@ const Navbar = () => {
             else document.body.style.overflow = 'auto';
         }
     }, [show_small_nav])
+
+    const handleAddressSubmit = async (value: any) => {
+        // if(!value) {
+        //     return alert('Please insert address');
+        // }
+
+        var result = await fetchBranchFromAddress(value);
+        // console.log({result});
+        
+        setCookie("address", value, { path: '/' });
+        // localStorage.setItem('address', JSON.stringify(result.result));
+        // setShowModal(!showModal);
+        if(result && result.status == 0) {
+            toast.error(result.message, toastOptions);
+        }
+        else {
+            setShowLocation(false);
+            return true;
+        }
+    }
+    
+    useEffect(() => {
+        if(location) {
+            // handleAddressSubmit(location);
+            setAddress(location);
+        }
+    }, [location])
 
     function logOut() {
         deleteCookie("mobile");
@@ -81,7 +110,7 @@ const Navbar = () => {
                             <div>
                                 <p className='text-primary-grey font-rubik font-medium max-sm:text-xs max-md:text-sm'>
                                     {/* {location || 'Ymca, 1, Ashoka Rd, Hanu'} */}
-                                    {address || 'Pin Your Location'}
+                                    {address || location || 'Pin Your Location'}
                                 </p>
 
                                 {/* <p className='text-primary-grey font-rubik font-medium max-sm:text-xs max-md:text-sm'>
@@ -145,6 +174,7 @@ const Navbar = () => {
                 <LocationPopup
                     showPopup={showLocation}
                     setShowPopup={setShowLocation}
+                    handleAddressSubmit={handleAddressSubmit}
                 />
             )}
         </>

@@ -1,33 +1,31 @@
 import { location_atom } from "@/atoms/index";
 import { Button, Input } from "@/components/Core";
 import { CommonProps } from "@/types/PopUpsTypes";
-import { fetchBranchFromAddress } from "@/utils/LibFunctions";
-import { setCookie } from "cookies-next";
 import { BsArrowLeft } from "react-icons/bs";
 import { useRecoilState } from "recoil";
 import PopupContainer from "./PopupContainer";
 
-const LocationPopup = ({ showPopup, setShowPopup }: CommonProps) => {
+const LocationPopup = ({ showPopup, setShowPopup, handleAddressSubmit }: { handleAddressSubmit: Function } & CommonProps) => {
     const [address, setAddress] = useRecoilState(location_atom);
 
-    const handleAddress = async (value: any) => {
-        // if(!value) {
-        //     return alert('Please insert address');
-        // }
+    // const handleAddress = async (value: any) => {
+    //     // if(!value) {
+    //     //     return alert('Please insert address');
+    //     // }
 
-        var result = await fetchBranchFromAddress(value);
-        // console.log({result});
+    //     var result = await fetchBranchFromAddress(value);
+    //     // console.log({result});
         
-        setCookie("address", value, { path: '/' });
-        // localStorage.setItem('address', JSON.stringify(result.result));
-        // setShowModal(!showModal);
-        if(result.status == 0) {
-            alert(result.message);
-        }
-        else {
-            setShowPopup(false);
-        }
-    }
+    //     setCookie("address", value, { path: '/' });
+    //     // localStorage.setItem('address', JSON.stringify(result.result));
+    //     // setShowModal(!showModal);
+    //     if(result.status == 0) {
+    //         alert(result.message);
+    //     }
+    //     else {
+    //         setShowPopup(false);
+    //     }
+    // }
 
     return (
         <PopupContainer
@@ -56,7 +54,7 @@ const LocationPopup = ({ showPopup, setShowPopup }: CommonProps) => {
                                 onChange={(e) => setAddress(e.target.value)}
                             />
                         </div>
-                        <Button title="Add / Edit Pincode" onClick={() => { handleAddress(address); }} />
+                        <Button title="Add / Edit Pincode" onClick={() => { handleAddressSubmit(address); }} />
                     </div>
                 </div>
             )}
