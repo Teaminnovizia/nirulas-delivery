@@ -63,8 +63,12 @@ const CartList = () => {
         .then(async (data) => {
             if (data.status) {
                 // setShowItemDetailWithAddOnPopup(false);
-
-                toast.success("Added To Cart", toastOptions);
+                if(product.remove_item) {
+                    toast.error("Removed From Cart", toastOptions);
+                }
+                else {
+                    toast.success("Added To Cart", toastOptions);
+                }
                 if(typeof(done) === "function") {
                     done();
                 }
