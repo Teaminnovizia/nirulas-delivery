@@ -46,7 +46,7 @@ const CartListItem = ({ data, addToCart }: {data: CartItemProps, addToCart: Func
                     width={130}
                     height={130}
                     priority
-                    className='max-sm:w-[40%] rounded-full overflow-hidden'
+                    className='max-sm:w-[40%] max-w-[150px] min-w-[150px] rounded-full overflow-hidden'
                 />
 
                 <div className='flex-grow flex-shrink space-y-2'>
@@ -69,7 +69,7 @@ const CartListItem = ({ data, addToCart }: {data: CartItemProps, addToCart: Func
                     </h6>
 
                     <p className='font-rubik text-primary-red font-semibold text-lg'>
-                        ₹ {data?.price}
+                        ₹ {Math.round(data?.price)}
                     </p>
                 </div>
             </div>

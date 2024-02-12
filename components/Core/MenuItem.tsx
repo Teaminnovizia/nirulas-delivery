@@ -85,7 +85,7 @@ const MenuItem = ({ data, addToCart, ...restProps }: { data: PropsType, addToCar
 
                 <div className='flex items-center gap-4'>
                     <h5 className='font-rubik normal-case font-bold md:text-3xl text-2xl text-primary-red'>
-                        ₹{data.price}
+                        ₹{Math.round(data.price)}
                     </h5>
 
                     <div className='flex items-center gap-1'>

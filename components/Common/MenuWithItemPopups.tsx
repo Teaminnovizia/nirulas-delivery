@@ -173,6 +173,8 @@ const MenuWithItemPopups = ({ MenuProductData }: { MenuProductData: any[] }) => 
                     productInfo={productInfo}
                     showPopup={showItemDetailPopup}
                     setShowPopup={setShowItemDetailPopup}
+                    addToCart={addToCart}
+                    setShowItemDetailWithAddOnPopup={setShowItemDetailWithAddOnPopup}
                 />
             )}
 

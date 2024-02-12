@@ -41,6 +41,7 @@ export const FAILED_ORDER_LIST = "/orders/failedOrderDataList";  // GET
 export const CHANGE_ORDER_STATUS = "/orders/changeOrderStatus";  // POST
 export const MISSED_ORDER = "/missedOrders/add";  // POST
 export const MY_ORDERS = "/my-orders";  // GET
+export const REPEAT_ORDER = "/repeat-order";  // GET
 export const PAYMENT_HISTORY = "/payment-history";  // GET
 
 export const USER_LOGIN = "/userLogin";  // POST

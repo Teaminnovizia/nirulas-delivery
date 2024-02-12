@@ -4,7 +4,7 @@ import { toastOptions } from "@/components/Layout";
 import { toast } from "react-toastify";
 import { UrlObject } from "url";
 import { getCookie, server } from "./axios-config";
-import { ADD_ROUTE_ANALYTICS, ADD_TIP, ADD_TO_CART, ADD_UTM_ANALYTICS, APPLY_COUPON, APPLY_LOYALTY_POINTS, CAPTURE_PAYMENT, CHANGE_DELIVERY_TYPE, CHANGE_ORDER_STATUS, CLEAR_CART, FAILED_ORDER_LIST, FETCH_CART_ITEMS, FETCH_COUPON_DEALS, GET_ADDRESSES, GET_BRANCH_ADDRESS, GET_COMMON, GET_LOCATION_LIST, GET_ONE_ORDER, GET_USER_ADDRESS, GET_USER_BY_MOBILE, HOME_SLIDER, MENU_LIST, MENU_WITH_PRODUCTS, MISSED_ORDER, MY_ORDERS, ORDER_LIST, ORDER_PAYMENT, PAYMENT_HISTORY, PAYMENT_MODES, PLACE_ORDER, PRODUCT_DETAILS_WITH_CUSTOMIZE, PRODUCT_SEARCH, REMOVE_COUPON, REMOVE_LOYALTY_POINTS, SEND_OTP, USER_LOGIN, VERIFY_ORDER_PAYMENT, VERIFY_OTP } from "./constants/routes";
+import { ADD_ROUTE_ANALYTICS, ADD_TIP, ADD_TO_CART, ADD_UTM_ANALYTICS, APPLY_COUPON, APPLY_LOYALTY_POINTS, CAPTURE_PAYMENT, CHANGE_DELIVERY_TYPE, CHANGE_ORDER_STATUS, CLEAR_CART, FAILED_ORDER_LIST, FETCH_CART_ITEMS, FETCH_COUPON_DEALS, GET_ADDRESSES, GET_BRANCH_ADDRESS, GET_COMMON, GET_LOCATION_LIST, GET_ONE_ORDER, GET_USER_ADDRESS, GET_USER_BY_MOBILE, HOME_SLIDER, MENU_LIST, MENU_WITH_PRODUCTS, MISSED_ORDER, MY_ORDERS, ORDER_LIST, ORDER_PAYMENT, PAYMENT_HISTORY, PAYMENT_MODES, PLACE_ORDER, PRODUCT_DETAILS_WITH_CUSTOMIZE, PRODUCT_SEARCH, REMOVE_COUPON, REMOVE_LOYALTY_POINTS, REPEAT_ORDER, SEND_OTP, USER_LOGIN, VERIFY_ORDER_PAYMENT, VERIFY_OTP } from "./constants/routes";
 
 export const getUrlObjectLink = (link: string): UrlObject => link as unknown as UrlObject;
 
@@ -568,6 +568,22 @@ export const myOrders = async (page = 1, limit = 10, sort_by = "created", sort_d
         let query = `?page=${page}&limit=${limit}&sort_by=${sort_by}&sort_direction=${sort_direction}`;
 
         var { data } = await server.get(MY_ORDERS + query);
+        return data;
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const repeatOrder = async (id: number) => {
+    try {
+        if (!getCookie("token") || !getCookie("mobile") || getCookie("otp_verified") !== "yes") {
+            return false;
+        }
+
+        let query = `?id=${id}`;
+        var { data } = await server.get(REPEAT_ORDER + query);
+        
         return data;
     } catch (error: any) {
         toast.error("Something went wrong!", toastOptions);

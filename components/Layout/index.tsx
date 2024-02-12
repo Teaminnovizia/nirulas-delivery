@@ -19,7 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     // useMemo(() => {
     //     console.log("layout called");
 
-    //     ReactGa.initialize("UA-185979255-1"); // react-ga
+        // ReactGa.initialize("UA-185979255-1"); // react-ga
     //     ReactGa.pageview(pathname + "?" + search.toString());
 
     //     ReactGa.initialize("AW-10783628317");

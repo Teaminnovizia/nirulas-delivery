@@ -6,7 +6,7 @@ import Image from "next/image";
 import { BsArrowLeft } from "react-icons/bs";
 import PopupContainer from "./PopupContainer";
 
-const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo }: { productInfo: ProductProps } & CommonProps) => {
+const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo, addToCart, setShowItemDetailWithAddOnPopup }: { productInfo: ProductProps, addToCart: Function, setShowItemDetailWithAddOnPopup: any } & CommonProps) => {
     return (
         <PopupContainer
             maxWidth='520px'
@@ -71,7 +71,7 @@ const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo }: { productInfo
                                     </p>
 
                                     <h6 className='normal-case font-rubik font-bold'>
-                                        ₹{productInfo?.price}
+                                        ₹{Math.round(productInfo?.price)}
                                     </h6>
                                 </div>
                             </div>
@@ -91,7 +91,15 @@ const ItemDetailPopup = ({ showPopup, setShowPopup, productInfo }: { productInfo
                                 {productInfo?.clean_description}
                             </p>
 
-                            <Button title='Add to cart' className='max-w-fit w-full mx-auto' />
+                            <Button title='Add to cart' className='max-w-fit w-full mx-auto' onClick={() => {
+                                if(productInfo.is_customizable) {
+                                    setShowItemDetailWithAddOnPopup(productInfo);
+                                    setShowPopup(false);
+                                }
+                                else {
+                                    addToCart(productInfo)
+                                }
+                            }} />
                         </div>
                     </div>
                 </div>
