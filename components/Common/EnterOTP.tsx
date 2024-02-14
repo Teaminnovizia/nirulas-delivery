@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import OTPInput from "react-otp-input";
 import { Button } from "../Core";
 
-const EnterOTP = ({ otp, setOtp, onSubmit, setClose }: { otp: string, setOtp: Function, onSubmit: LoginSubmitType, setClose?: Function }) => {
+const EnterOTP = ({ phone, otp, setOtp, onSubmit, setClose }: { phone: string, otp: string, setOtp: Function, onSubmit: LoginSubmitType, setClose?: Function }) => {
     useEffect(() => {
         if (window !== undefined) {
             gsap.to('#otp_form', { duration: 0.5, opacity: 1 });
@@ -33,9 +33,9 @@ const EnterOTP = ({ otp, setOtp, onSubmit, setClose }: { otp: string, setOtp: Fu
                     Please enter the code we text you.
                 </p>
 
-                <p className='font-rubik'>
-                    +91-9876543210
-                </p>
+                {phone ? <p className='font-rubik'>
+                    +91-{phone}
+                </p> : ""}
             </div>
 
             <form onSubmit={(e) => onSubmit(e, 1, setClose)} className='w-full space-y-5'>

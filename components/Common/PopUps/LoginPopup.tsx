@@ -78,6 +78,7 @@ const LoginPopup = ({ showPopup, setShowPopup }: CommonProps) => {
 
                         {step === 1 && (
                             <EnterOTP
+                                phone={phone}
                                 otp={otp}
                                 setOtp={setOtp}
                                 onSubmit={onSubmit}
