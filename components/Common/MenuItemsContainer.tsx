@@ -30,7 +30,8 @@ const MenuItemsContainer = ({ data, addToCart, ...restProps }: { data: PropsType
     function handleVegNonvegChange(isNonVeg: number) {
 
         if(isNonVeg == 2) {
-            setProductData(data);
+            var items = data?.items.filter(pi => pi.recomended == 1);
+            setProductData({ ...ProductData, items });
         }
         else {
             var items = data?.items.filter(pi => pi.is_non_veg == isNonVeg);
