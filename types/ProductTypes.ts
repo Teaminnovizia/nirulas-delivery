@@ -6,6 +6,7 @@ export interface ProductProps {
     id: number
     is_bogo_product: 0 | 1
     is_customizable: 0 | 1
+    recommended: 0 | 1
     is_non_veg: 0 | 1
     menu_id: 0 | 1
     mrp: number

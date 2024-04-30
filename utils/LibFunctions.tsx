@@ -4,7 +4,7 @@ import { toastOptions } from "@/components/Layout";
 import { toast } from "react-toastify";
 import { UrlObject } from "url";
 import { getCookie, server } from "./axios-config";
-import { ADD_ROUTE_ANALYTICS, ADD_TIP, ADD_TO_CART, ADD_UTM_ANALYTICS, APPLY_COUPON, APPLY_LOYALTY_POINTS, CAPTURE_PAYMENT, CHANGE_DELIVERY_TYPE, CHANGE_ORDER_STATUS, CLEAR_CART, FAILED_ORDER_LIST, FETCH_CART_ITEMS, FETCH_COUPON_DEALS, GET_ADDRESSES, GET_BRANCH_ADDRESS, GET_COMMON, GET_LOCATION_LIST, GET_ONE_ORDER, GET_USER_ADDRESS, GET_USER_BY_MOBILE, HOME_SLIDER, MENU_LIST, MENU_WITH_PRODUCTS, MISSED_ORDER, MY_ORDERS, ORDER_LIST, ORDER_PAYMENT, PAYMENT_HISTORY, PAYMENT_MODES, PLACE_ORDER, PRODUCT_DETAILS_WITH_CUSTOMIZE, PRODUCT_SEARCH, REMOVE_COUPON, REMOVE_LOYALTY_POINTS, REPEAT_ORDER, SEND_OTP, USER_LOGIN, VERIFY_ORDER_PAYMENT, VERIFY_OTP } from "./constants/routes";
+import { ADD_ROUTE_ANALYTICS, ADD_TIP, ADD_TO_CART, ADD_UTM_ANALYTICS, APPLY_COUPON, APPLY_LOYALTY_POINTS, CAPTURE_PAYMENT, CHANGE_DELIVERY_TYPE, CHANGE_ORDER_STATUS, CLEAR_CART, FAILED_ORDER_LIST, FETCH_CART_ITEMS, FETCH_CART_REC_ITEMS, FETCH_COUPON_DEALS, GET_ADDRESSES, GET_BRANCH_ADDRESS, GET_COMMON, GET_LOCATION_LIST, GET_ONE_ORDER, GET_USER_ADDRESS, GET_USER_BY_MOBILE, HOME_SLIDER, MENU_LIST, MENU_WITH_PRODUCTS, MISSED_ORDER, MY_ORDERS, ORDER_LIST, ORDER_PAYMENT, PAYMENT_HISTORY, PAYMENT_MODES, PLACE_ORDER, PRODUCT_DETAILS_WITH_CUSTOMIZE, PRODUCT_SEARCH, REMOVE_COUPON, REMOVE_LOYALTY_POINTS, REPEAT_ORDER, SEND_OTP, USER_LOGIN, VERIFY_ORDER_PAYMENT, VERIFY_OTP } from "./constants/routes";
 
 export const getUrlObjectLink = (link: string): UrlObject => link as unknown as UrlObject;
 
@@ -12,7 +12,7 @@ export const getHomeSliders = async () => {
     try {
         var { data } = await server.get(HOME_SLIDER);
         // console.log(data);
-        if(data.status == 1) {
+        if (data.status == 1) {
             return data.result;
         }
         else {
@@ -52,7 +52,7 @@ export const getMenuList = async () => {
     try {
         var { data } = await server.get(MENU_LIST);
         // console.log(data);
-        if(data.status == 1) {
+        if (data.status == 1) {
             return data.result;
         }
         else {
@@ -68,7 +68,7 @@ export const getMenuWithProducts = async () => {
     try {
         var { data } = await server.get(MENU_WITH_PRODUCTS);
         // console.log(data);
-        if(data.status == 1) {
+        if (data.status == 1) {
             return data.result;
         }
         else {
@@ -101,7 +101,7 @@ export const AddToCart = async (body: any) => {
 
         var { data } = await server.post(ADD_TO_CART, body);
         // console.log(data);
-        if(data.status == 1) {
+        if (data.status == 1) {
             return data;
         }
         else {
@@ -121,7 +121,22 @@ export const fetchCartItems = async (from_cart = false) => {
         }
         var { data } = await server.post(FETCH_CART_ITEMS, payloads);
         // console.log(data);
-        if(data.status == 1) {
+        if (data.status == 1) {
+            return data;
+        }
+        else {
+            throw new Error(data.message);
+        }
+    } catch (error: any) {
+        toast.error("Something went wrong!", toastOptions);
+        console.log('Error', error.message);
+    }
+}
+
+export const fetchRecommendedProducts = async (cart_id: Number) => {
+    try {
+        var { data } = await server.get(FETCH_CART_REC_ITEMS, { params: { cart_id } });
+        if (data.status == 1) {
             return data;
         }
         else {
@@ -137,7 +152,7 @@ export const sentOtpForVerification = async (body: any) => {
     try {
         var { data } = await server.post(SEND_OTP, body);
         // console.log(data);
-        if(data.status == 1) {
+        if (data.status == 1) {
             return data;
         }
         else {
@@ -205,7 +220,7 @@ export const changeDeliveryType = async (type: string) => {
 
 export const addTip = async (tip: string) => {
     try {
-        if(!getCookie("token")) {
+        if (!getCookie("token")) {
             toast.error("Something went wrong!", toastOptions);
             return false;
         }
@@ -396,25 +411,25 @@ export const getUniqueOrder = async (payload: any) => {
 export const generateRandomString = (length: number) => {
     let result = "";
     const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const charactersLength = characters.length;
-  
+
     for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-  
+
     return result;
 };
 
 export function removeFieldFromObject<T extends Record<string, any>, K extends keyof T>(
-  obj: T,
-  fieldName: K
+    obj: T,
+    fieldName: K
 ): T {
-  // Use destructuring to create a new object and omit the specified field
-  const { [fieldName]: _, ...rest } = obj;
+    // Use destructuring to create a new object and omit the specified field
+    const { [fieldName]: _, ...rest } = obj;
 
-  // Cast the return type to maintain strict type safety
-  return rest as T;
+    // Cast the return type to maintain strict type safety
+    return rest as T;
 }
 
 export const saveUserRouteAnalytics = async (order_placed = false) => {
@@ -423,7 +438,7 @@ export const saveUserRouteAnalytics = async (order_placed = false) => {
         if (storedPath) {
             try {
                 const parsedPath = JSON.parse(storedPath);
-                if(Array.isArray(parsedPath?.histories) && parsedPath.histories.length > 0) {
+                if (Array.isArray(parsedPath?.histories) && parsedPath.histories.length > 0) {
                     await addUserRouteAnalytics({ page: parsedPath?.histories, date: parsedPath.date, order_placed });
                 }
                 localStorage.removeItem("track_session");
@@ -442,7 +457,7 @@ export const saveUserRouteAnalytics = async (order_placed = false) => {
 
 export const addUserRouteAnalytics = async (payload: any) => {
     try {
-        if(!getCookie("token")) {
+        if (!getCookie("token")) {
             return;
         }
         var { data } = await server.post(ADD_ROUTE_ANALYTICS, payload);
@@ -583,7 +598,7 @@ export const repeatOrder = async (id: number) => {
 
         let query = `?id=${id}`;
         var { data } = await server.get(REPEAT_ORDER + query);
-        
+
         return data;
     } catch (error: any) {
         toast.error("Something went wrong!", toastOptions);

@@ -11,7 +11,7 @@ const RecommendedItem = dynamic(() => import('@/components/Common').then(mod => 
 
 const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <RightArrow top='50%' right='-20px' color='black' />,
@@ -44,7 +44,9 @@ const settings = {
     ]
 };
 
-const Recommended = () => {
+const Recommended = ({ products }: any) => {
+
+
     return (
         <section className='w-full sm:px-8 px-3'>
             <div className='max-w-6xl mx-auto py-4 space-y-8'>
@@ -53,23 +55,11 @@ const Recommended = () => {
                 </h2>
 
                 <Slider {...settings} className='w-full sub_brand_slick'>
-                    {/* {KNOWFOODDATA?.map((x) => ( */}
-                    <div>
-                        <RecommendedItem />
-                    </div>
-                    <div>
-                        <RecommendedItem />
-                    </div>
-                    <div>
-                        <RecommendedItem />
-                    </div>
-                    <div>
-                        <RecommendedItem />
-                    </div>
-                    <div>
-                        <RecommendedItem />
-                    </div>
-                    {/* ))} */}
+                    {products?.map((x: any, key: number) => (
+                        <div key={key}>
+                            <RecommendedItem data={x} />
+                        </div>
+                    ))}
                 </Slider>
             </div>
         </section>

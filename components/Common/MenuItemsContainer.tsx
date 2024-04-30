@@ -28,13 +28,13 @@ const MenuItemsContainer = ({ data, addToCart, ...restProps }: { data: PropsType
     }
 
     function handleVegNonvegChange(isNonVeg: number) {
-
+        var items = [];
         if(isNonVeg == 2) {
-            var items = data?.items.filter(pi => pi.recommended === 1);
+            items = data?.items.filter(pi => pi.recommended === 1);
             setProductData({ ...ProductData, items });
         }
         else {
-            var items = data?.items.filter(pi => pi.is_non_veg == isNonVeg);
+            items = data?.items.filter(pi => pi.is_non_veg == isNonVeg);
             setProductData({ ...ProductData, items });
         }
 
@@ -120,6 +120,7 @@ interface PropsType {
         sub_menu_id?: number
         is_customizable: number
         is_non_veg: number
+        recommended: number
         is_bestseller: number
     }[],
     sub_menus: {

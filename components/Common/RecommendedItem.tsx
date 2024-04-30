@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { Button } from "../Core";
 
-const RecommendedItem = () => {
+const RecommendedItem = ({ data }: { data: any }) => {
+    console.log(data, "data");
+
     return (
         <div
             className={`flex flex-col items-center space-y-4 text-center outline-none`}
@@ -19,7 +21,7 @@ const RecommendedItem = () => {
             </div>
 
             <h6 className='sm:text-lg text-base font-rubik normal-case font-bold whitespace-pre-line'>
-                Classic Fudge Brownie
+                {data?.name}
             </h6>
 
             <Button title='Add' />

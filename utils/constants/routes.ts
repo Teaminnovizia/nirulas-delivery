@@ -16,6 +16,7 @@ export const MENU_WITH_PRODUCTS = "/product/menuWithProduct?from=website";  // G
 export const GET_USER_BY_MOBILE = "/user/getUserByMobile";  // POST body { mobile }
 export const ADD_TO_CART = "/carts/addToCart";  // POST body { convenience_fee, delivery_charge, is_customized, price, product_id, product_name, qty, mobile, token }
 export const FETCH_CART_ITEMS = "/carts/viewCart";  // POST body { mobile, token, from_cart }
+export const FETCH_CART_REC_ITEMS = "/get-recommended-product";  // POST body { mobile, token, from_cart }
 export const SEND_OTP = "/sendOtpForRegistration";  // POST body { mobile }
 export const VERIFY_OTP = "/verifyOtp";  // POST body { mobile, otp, token }
 export const GET_USER_ADDRESS = "/getUserAddress";  // POST

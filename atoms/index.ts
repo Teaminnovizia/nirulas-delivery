@@ -30,6 +30,11 @@ export const categories_atom = atom({
     default: []
 })
 
+export const rec_prod_atom = atom({
+    key: 'rec_prod',
+    default: []
+})
+
 export const cart_atom = atom({
     key: 'cart',
     default: {

@@ -1,7 +1,7 @@
 "use client"
 
-import { cart_atom, user_atom } from "@/atoms/index";
-import { getUserByMobile } from "@/utils/LibFunctions";
+import { cart_atom, rec_prod_atom, user_atom } from "@/atoms/index";
+import { fetchRecommendedProducts, getUserByMobile } from "@/utils/LibFunctions";
 import dynamic from "next/dynamic";
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -13,6 +13,8 @@ const Bill = dynamic(() => import('@/components/Pages/Cart/Bill'));
 
 const CartReview = () => {
     const CartData = useRecoilValue(cart_atom);
+    const RecProdData = useRecoilValue(rec_prod_atom);
+    const setRecProdData = useSetRecoilState(rec_prod_atom);
     const setUserData = useSetRecoilState(user_atom);
 
     async function fetchuser() {
@@ -23,12 +25,23 @@ const CartReview = () => {
             }
         }
     }
-    
+
+    async function fetchRec() {
+        const recommended = await fetchRecommendedProducts(CartData.id);
+        setRecProdData(recommended?.result);
+    }
+
+    useEffect(() => {
+        if (CartData?.id) {
+            fetchRec();
+        }
+    }, [CartData])
+
     useEffect(() => {
         fetchuser();
     }, [])
-    
-    if(!CartData) {
+
+    if (!CartData) {
         return (
             <div>
                 <h3 className="font-bold text-center mt-6">Cart Is Empty</h3>
@@ -39,7 +52,7 @@ const CartReview = () => {
         <>
             <CartList />
             <Divider />
-            <Recommended />
+            <Recommended products={RecProdData} />
             <Divider />
             <Bill />
         </>

@@ -78,9 +78,6 @@ const MenuItem = ({ data, addToCart, ...restProps }: { data: PropsType, addToCar
                             {data.is_customizable == 1 && <p className="text-xs text-center mt-1 text-primary-red">Customize</p>}
                         </div>
                     }
-
-                    
-                    
                 </div>
 
                 <div className='flex items-center gap-4'>
@@ -121,5 +118,6 @@ interface PropsType {
     qty?: number
     remove_item?: boolean
     is_non_veg: number
+    recommended: number
     is_bestseller: number
 }
