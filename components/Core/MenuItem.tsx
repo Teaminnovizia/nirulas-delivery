@@ -94,7 +94,7 @@ const MenuItem = ({ data, addToCart, ...restProps }: { data: PropsType, addToCar
                         </div>
 
                         {
-                            data?.is_bestseller && <StarIcon width={28} height={28} />
+                            data?.recommended && <StarIcon width={28} height={28} />
                         }
                     </div>
                 </div>
