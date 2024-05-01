@@ -5,7 +5,7 @@ import LocationPopup from '@/components/Common/PopUps/LocationPopup';
 import UseLocation from '@/components/Hooks/UseLocation';
 import { fetchBranchFromAddress, getUrlObjectLink } from '@/utils/LibFunctions';
 import { nirulasWebsiteURL } from '@/utils/constants';
-import { deleteCookie, setCookie } from 'cookies-next';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,11 +47,11 @@ const Navbar = () => {
 
         var result = await fetchBranchFromAddress(value);
         // console.log({result});
-        
+
         setCookie("address", value, { path: '/' });
         // localStorage.setItem('address', JSON.stringify(result.result));
         // setShowModal(!showModal);
-        if(result && result.status == 0) {
+        if (result && result.status == 0) {
             toast.error(result.message, toastOptions);
         }
         else {
@@ -59,9 +59,9 @@ const Navbar = () => {
             return true;
         }
     }
-    
+
     useEffect(() => {
-        if(location) {
+        if (location) {
             // handleAddressSubmit(location);
             setAddress(location);
         }
@@ -73,6 +73,7 @@ const Navbar = () => {
         deleteCookie("branch");
         deleteCookie("role");
         deleteCookie("token");
+        window.location.reload();
     }
 
     return (
@@ -134,9 +135,16 @@ const Navbar = () => {
                             />
                         </Link>
 
-                        <button onClick={() => setShowLogin(true)} className='font-rubik text-primary-grey'>
-                            Login
-                        </button>
+                        {
+                            !getCookie("token") ? (
+                                <button onClick={() => setShowLogin(true)} className='font-rubik text-primary-grey'>
+                                    Login
+                                </button>
+                            ) : <button onClick={() => logOut()} className='font-rubik text-primary-grey'>
+                                Logout
+                            </button>
+                        }
+
 
                         {/* <button onClick={() => setShowSignUp(true)} className='font-rubik text-primary-grey'>
                             Sign up

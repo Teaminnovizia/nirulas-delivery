@@ -4,6 +4,7 @@ import { cart_atom } from "@/atoms/index";
 import { CartItemProps } from "@/types/CartTypes";
 import { ProductProps } from "@/types/ProductTypes";
 import { getProductDetailWithCustomize } from "@/utils/LibFunctions";
+import { BaseUrl } from "@/utils/constants";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -40,7 +41,7 @@ const CartListItem = ({ data, addToCart }: {data: CartItemProps, addToCart: Func
         <div className='w-full flex items-center justify-between space-x-4'>
             <div className='max-sm:w-[70%] flex items-center space-x-4'>
                 <Image
-                    src='/Images/temp/ice-cream.png'
+                    src={BaseUrl + "public" + CustomizeData?.thumbnail}
                     alt='Product'
                     quality={100}
                     width={130}
